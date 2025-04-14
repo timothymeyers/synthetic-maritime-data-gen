@@ -172,15 +172,14 @@ class RouteFinder:
             }
 
         return None
-
-    @staticmethod
-    def get_route_endpoints(route: LineString) -> Tuple[Tuple[float, float], Tuple[float, float]]:
+    
+    def get_route_endpoints(self, route: LineString) -> Tuple[Tuple[float, float], Tuple[float, float]]:
         """Get the start and end coordinates of a route."""
         coords = list(route.coords)
         return coords[0], coords[-1]
 
-    @staticmethod
-    def get_next_waypoints(
+    
+    def get_next_waypoints(self, 
         route: LineString,
         point: Point,
         heading: float,
@@ -327,6 +326,17 @@ class RouteFinder:
                     heading_diff = min(heading_diff, 360 - heading_diff)  # Account for circular nature of headings
                     result['heading_diff'] = heading_diff
                     result['route_heading'] = route_heading
+                    
+                    # add the route start and end to the result. Note that if the provided heading is going backwards, the start and end will be swapped.
+                    start, end = self.get_route_endpoints(route)
+                    if heading_diff <= heading_threshold:
+                        result['starting-point'] = end
+                        result['ending-point'] = start
+                    else:
+                        # If the route is going backwards, swap start and end
+                        result['starting-point'] = start
+                        result['ending-point'] = end               
+                    
                     if heading_diff <= heading_threshold:
                         all_routes.append(result)
 

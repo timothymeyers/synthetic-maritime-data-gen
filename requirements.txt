@@ -3,3 +3,9 @@ pandas
 geopandas
 requests
 shapely
+rtree
+dotenv
+autogen
+autogen-agentchat
+autogen-ext[openai]
+autogen-ext[azure-openai]
