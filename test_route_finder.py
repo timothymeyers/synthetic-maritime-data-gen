@@ -171,6 +171,106 @@ class TestRouteFinder(unittest.TestCase):
         self.assertIsNotNone(result_all)
         self.assertGreaterEqual(result_limited['distance_nm'], result_all['distance_nm'])
 
+class TestRouteFinderWithRealData(unittest.TestCase):
+    """Test RouteFinder with actual shipping lane data from default URL."""
+    
+    @classmethod
+    def setUpClass(cls):
+        """Set up the route finder once for all tests and load real data."""
+        cls.finder = RouteFinder()
+        cls.finder.load_data()  # Loads from the default URL
+    
+    def test_atlantic_ocean_major_route(self):
+        """Test finding a major route in the Atlantic Ocean."""
+        result = self.finder.find_nearest_route(
+            lon=-67.5313058, 
+            lat=34.9986041, 
+            distance_threshold=150
+        )
+        
+        self.assertIsNotNone(result)
+        self.assertEqual(result['route_type'], RouteType.MAJOR)
+        self.assertEqual(result['route_id'], 16)
+    
+    
+    def test_pacific_ocean_minor_route(self):
+        """Test finding a minor route in the Pacific Ocean."""
+        result = self.finder.find_nearest_route(
+            lon=-124, 
+            lat=31.5, 
+            distance_threshold=15
+        )
+        
+        self.assertIsNotNone(result)
+        self.assertEqual(result['route_type'], RouteType.MINOR)
+        self.assertEqual(result['route_id'], 14)
+    
+    def test_pacific_ocean_middle_route(self):
+        """Test finding a middle route in the Pacific Ocean."""
+        result = self.finder.find_nearest_route(
+            lon=-124, 
+            lat=31.5, 
+            distance_threshold=25
+        )
+        
+        self.assertIsNotNone(result)
+        self.assertEqual(result['route_type'], RouteType.MIDDLE)
+        self.assertEqual(result['route_id'], 49)
+    
+    def test_pacific_ocean_major_route(self):
+        """Test finding a major route in the Pacific Ocean."""
+        result = self.finder.find_nearest_route(
+            lon=-124, 
+            lat=31.5, 
+            distance_threshold=75
+        )
+        
+        self.assertIsNotNone(result)
+        self.assertEqual(result['route_type'], RouteType.MAJOR)
+        self.assertEqual(result['route_id'], 17)
+        
+    def test_pacific_ocean_all_routes(self):
+        """Test finding a major route in the Pacific Ocean."""
+        result = self.finder.find_nearest_route(
+            lon=-124, 
+            lat=31.5, 
+            distance_threshold=75,
+            all_routes=True
+        )
+        
+        self.assertIsNotNone(result)
+        self.assertEqual(result['route_type'], RouteType.MINOR)
+        self.assertEqual(result['route_id'], 14)
+        
+    def test_get_next_waypoints_pacific_eastward(self):
+        """Test getting the next 5 waypoints on a Pacific Ocean route with eastward heading."""
+        # First find a suitable route in the Pacific
+        result = self.finder.find_nearest_route(
+            lon=-124, 
+            lat=31.5, 
+            distance_threshold=75
+        )
+        
+        self.assertIsNotNone(result)
+        route = result['route']
+        
+        # Select a point somewhere on the route
+        point_on_route = Point(route.coords[len(route.coords) // 3])
+        
+        # Use an eastward heading (90 degrees)
+        heading = 90
+        
+        # Get the next 5 waypoints
+        waypoints = self.finder.get_next_waypoints(route, point_on_route, heading, 5)
+        
+        # Verify we got waypoints
+        self.assertEqual(len(waypoints), 5)
+        
+        # Verify the waypoints are in the correct direction (generally eastward)
+        for i in range(1, len(waypoints)):
+            # Each subsequent point should be eastward (increasing longitude)
+            self.assertGreaterEqual(waypoints[i].x, waypoints[i-1].x)
+
 if __name__ == "__main__":
     logging.basicConfig(
         level=logging.INFO,

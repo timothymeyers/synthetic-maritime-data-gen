@@ -80,7 +80,8 @@ class RouteFinder:
         lon: float,
         lat: float,
         distance_threshold: float = 50,
-        num_candidates: int = 10
+        num_candidates: int = 10,
+        all_routes: bool = False
     ) -> Optional[Dict]:
         """
         Find the nearest shipping route to the given coordinates.
@@ -106,6 +107,15 @@ class RouteFinder:
         
         for idx, routes, route_type in route_configs:
             result = self._find_single_route(idx, routes, lon, lat, distance_threshold, num_candidates)
+            
+            if result and result['distance_nm'] < best_distance:
+                result['route_type'] = route_type
+                best_result = result
+                best_distance = result['distance_nm']
+            
+            if not all_routes and best_result: 
+                return best_result    
+            """
             if result:
                 # Always take a major route if within threshold
                 if route_type == RouteType.MAJOR and result['distance_nm'] <= distance_threshold:
@@ -116,8 +126,9 @@ class RouteFinder:
                     result['route_type'] = route_type
                     best_result = result
                     best_distance = result['distance_nm']
+            """
                     
-        return best_result
+        return best_result    
 
     def _find_single_route(
         self,
