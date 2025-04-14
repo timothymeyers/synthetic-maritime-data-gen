@@ -101,13 +101,23 @@ class RouteFinder:
             (self.minor_idx, self.minor, RouteType.MINOR)
         ]
 
+        best_result = None
+        best_distance = float('inf')
+        
         for idx, routes, route_type in route_configs:
             result = self._find_single_route(idx, routes, lon, lat, distance_threshold, num_candidates)
             if result:
-                result['route_type'] = route_type
-                return result
-
-        return None
+                # Always take a major route if within threshold
+                if route_type == RouteType.MAJOR and result['distance_nm'] <= distance_threshold:
+                    result['route_type'] = route_type
+                    return result
+                # For other routes, only take if closer than current best
+                elif result['distance_nm'] < best_distance:
+                    result['route_type'] = route_type
+                    best_result = result
+                    best_distance = result['distance_nm']
+                    
+        return best_result
 
     def _find_single_route(
         self,
@@ -157,3 +167,98 @@ class RouteFinder:
         """Get the start and end coordinates of a route."""
         coords = list(route.coords)
         return coords[0], coords[-1]
+
+    @staticmethod
+    def get_next_waypoints(
+        route: LineString,
+        point: Point,
+        heading: float,
+        num_waypoints: int
+    ) -> List[Point]:
+        """
+        Get the next waypoints along a route based on current position and heading.
+
+        Args:
+            route: A LineString representing the shipping route
+            point: Point object representing current position on route
+            heading: Current heading in degrees (0-360)
+            num_waypoints: Number of next waypoints to return
+
+        Returns:
+            List of Point objects representing the next waypoints
+        """
+        # Project the point onto the route to get the exact location
+        proj_distance = route.project(point)
+        coords = list(route.coords)
+        
+        # Find the segment we're currently on
+        current_segment_idx = 0
+        current_distance = 0
+        segment_distances = []
+        
+        # Calculate cumulative distances along the route
+        for i in range(len(coords) - 1):
+            segment = LineString([coords[i], coords[i + 1]])
+            distance = segment.length
+            segment_distances.append(current_distance + distance)
+            if current_distance <= proj_distance <= current_distance + distance:
+                current_segment_idx = i
+            current_distance += distance
+            
+        # Determine direction based on heading and route orientation
+        forward_direction = True
+        if current_segment_idx < len(coords) - 1:
+            segment_heading = RouteFinder._calculate_heading(
+                coords[current_segment_idx],
+                coords[current_segment_idx + 1]
+            )
+            # If the difference between current heading and segment heading is > 90°,
+            # we're likely going in the opposite direction
+            heading_diff = abs(heading - segment_heading)
+            if heading_diff > 90 and heading_diff < 270:
+                forward_direction = False
+                
+        waypoints = []
+        if forward_direction:
+            # Get next points in forward direction
+            for i in range(current_segment_idx + 1, min(len(coords), current_segment_idx + num_waypoints + 1)):
+                waypoints.append(Point(coords[i]))
+        else:
+            # Get next points in reverse direction
+            for i in range(current_segment_idx, max(-1, current_segment_idx - num_waypoints), -1):
+                waypoints.append(Point(coords[i]))
+                
+        return waypoints[:num_waypoints]
+
+    @staticmethod
+    def _calculate_heading(start_coord: Tuple[float, float], end_coord: Tuple[float, float]) -> float:
+        """
+        Calculate the heading between two coordinates.
+        
+        Args:
+            start_coord: Starting coordinate (lon, lat)
+            end_coord: Ending coordinate (lon, lat)
+            
+        Returns:
+            Heading in degrees (0-360)
+        """
+        import math
+        
+        start_lon, start_lat = start_coord
+        end_lon, end_lat = end_coord
+        
+        # Convert to radians
+        lat1 = math.radians(start_lat)
+        lat2 = math.radians(end_lat)
+        diff_lon = math.radians(end_lon - start_lon)
+        
+        # Calculate heading
+        x = math.sin(diff_lon) * math.cos(lat2)
+        y = math.cos(lat1) * math.sin(lat2) - (math.sin(lat1) * math.cos(lat2) * math.cos(diff_lon))
+        bearing = math.atan2(x, y)
+        
+        # Convert to degrees
+        heading = math.degrees(bearing)
+        
+        # Normalize to 0-360
+        return (heading + 360) % 360
