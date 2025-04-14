@@ -333,11 +333,15 @@ class RouteFinder:
         if not all_routes:
             return None
 
-        # Sort by priority (major > middle > minor) and then by distance
         priority_map = {RouteType.MAJOR: 0, RouteType.MIDDLE: 1, RouteType.MINOR: 2}
+        
         sorted_routes = sorted(
             all_routes,
-            key=lambda x: (priority_map[x['route_type']], x['distance_nm'])
+            #key=lambda x: (priority_map[x['route_type']], x['distance_nm'])
+            key=lambda x: (x['distance_nm'],x['heading_diff'] )
         )
+
+        print (f"Sorted routes: {sorted_routes[:2]}")
+
 
         return sorted_routes[0]

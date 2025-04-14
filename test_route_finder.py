@@ -313,6 +313,59 @@ class TestRouteFinderWithRealData(unittest.TestCase):
         for i in range(1, len(waypoints)):
             # Each subsequent point should be eastward (increasing longitude)
             self.assertGreaterEqual(waypoints[i].x, waypoints[i-1].x)
+            
+    def test_find_nearest_route_with_heading_pacific_NW(self):
+        """Test finding a route with a specific heading in the Pacific Ocean."""
+        # First find a suitable route in the Pacific
+        result = self.finder.find_nearest_route_with_heading(
+            lon=-124, 
+            lat=31.5, 
+            distance_threshold=75,
+            heading=304.5,
+            heading_threshold=20
+        )
+
+        # Verify we got a result
+        self.assertIsNotNone(result)
+        self.assertEqual(result['route_type'], RouteType.MAJOR)
+        self.assertEqual(result['route_id'], 17)
+        self.assertLess(result['heading_diff'], 20)
+        
+    def test_find_nearest_route_with_heading_pacific_Fail(self):
+        """Test finding a route with a specific heading in the Pacific Ocean."""
+        # First find a suitable route in the Pacific
+        result = self.finder.find_nearest_route_with_heading(
+            lon=-124, 
+            lat=31.5, 
+            distance_threshold=15,
+            heading=304.5,
+            heading_threshold=20
+        )
+
+        # Verify we got a result
+        self.assertIsNone(result)
+        
+    def test_find_nearest_route_with_heading_pacific_SW(self):
+        """Test finding a route with a specific heading in the Pacific Ocean."""
+        # First find a suitable route in the Pacific
+        result = self.finder.find_nearest_route_with_heading(
+            lon=-124, 
+            lat=31.5, 
+            distance_threshold=75,
+            heading=259.052897776481,
+            heading_threshold=20
+        )
+        
+        """expected_result = [
+            {'route_id': 14, 'route': <LINESTRING (-180 9.079, -179.78 9.215, -179.35 9.477, -179.128 9.612, -178....>, 'proj_distance': 60.753517908220836, 'nearest_point': <POINT (-124.023 31.642)>, 'distance_nm': 8.611009030208416, 'route_type': 'Minor', 'heading_diff': 0.0, 'route_heading': 259.052897776481}, {'route_id': 49, 'route': <LINESTRING (-157.621 21.321, -157.256 21.489, -157.185 21.522, -157.114 21....>, 'proj_distance': 35.277247311102265, 'nearest_point': <POINT (-124.051 31.806)>, 'distance_nm': 18.61356735080749, 'route_type': 'Middle', 'heading_diff': 0.07369215317851285, 'route_heading': 258.9792056233025}]"""
+       
+        
+        # Verify we got a result
+        self.assertIsNotNone(result)
+        self.assertEqual(result['route_type'], RouteType.MINOR)
+        self.assertEqual(result['route_id'], 14)
+        self.assertLess(result['heading_diff'], 20)
+
 
 if __name__ == "__main__":
     logging.basicConfig(
