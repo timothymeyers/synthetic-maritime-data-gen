@@ -171,6 +171,49 @@ class TestRouteFinder(unittest.TestCase):
         self.assertIsNotNone(result_all)
         self.assertGreaterEqual(result_limited['distance_nm'], result_all['distance_nm'])
 
+    def test_find_nearest_route_with_heading_aligned(self):
+        """Test finding a route that aligns with the current heading"""
+        self._create_test_routes()
+        # Test point near major route (y=0) heading east (90 degrees)
+        result = self.finder.find_nearest_route_with_heading(5.0, 0.1, 90, distance_threshold=50)
+        
+        self.assertIsNotNone(result)
+        self.assertEqual(result['route_type'], RouteType.MAJOR)
+        self.assertLess(result['heading_diff'], 45)  # Should be close to 90 degrees
+        
+    def test_find_nearest_route_with_heading_misaligned(self):
+        """Test that misaligned routes are not returned"""
+        self._create_test_routes()
+        # Test point near major route but heading north (0 degrees)
+        result = self.finder.find_nearest_route_with_heading(5.0, 0.1, 0, distance_threshold=50)
+        
+        self.assertIsNone(result)  # Should not find a route as heading is perpendicular
+        
+    def test_find_nearest_route_with_heading_priority(self):
+        """Test that major routes are prioritized when multiple routes align with heading"""
+        self._create_test_routes()
+        # Add a parallel major route
+        major_route2 = LineString([(0, 0.5), (10, 0.5)])
+        self.finder.major.append(major_route2)
+        self.finder._build_indices()
+        
+        # Test point between two parallel routes heading east
+        result = self.finder.find_nearest_route_with_heading(5.0, 0.25, 90, distance_threshold=50)
+        
+        self.assertIsNotNone(result)
+        self.assertEqual(result['route_type'], RouteType.MAJOR)
+        self.assertLess(result['heading_diff'], 45)
+        
+    def test_find_nearest_route_with_heading_reverse_direction(self):
+        """Test finding a route when traveling in reverse direction"""
+        self._create_test_routes()
+        # Test point near major route heading west (270 degrees)
+        result = self.finder.find_nearest_route_with_heading(5.0, 0.1, 270, distance_threshold=50)
+        
+        self.assertIsNotNone(result)
+        self.assertEqual(result['route_type'], RouteType.MAJOR)
+        self.assertLess(result['heading_diff'], 45)
+
 class TestRouteFinderWithRealData(unittest.TestCase):
     """Test RouteFinder with actual shipping lane data from default URL."""
     

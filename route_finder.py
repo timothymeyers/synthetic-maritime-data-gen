@@ -273,3 +273,71 @@ class RouteFinder:
         
         # Normalize to 0-360
         return (heading + 360) % 360
+    
+    def find_nearest_route_with_heading(
+        self,
+        lon: float,
+        lat: float,
+        heading: float,
+        distance_threshold: float = 50,
+        heading_threshold: float = 45,
+        num_candidates: int = 10
+    ) -> Optional[Dict]:
+        """
+        Find the nearest shipping route to the given coordinates that aligns with the provided heading.
+
+        Args:
+            lon: Longitude coordinate
+            lat: Latitude coordinate
+            heading: Current heading in degrees (0-360)
+            distance_threshold: Maximum distance in nautical miles to consider a route
+            heading_threshold: Maximum allowed difference in degrees between route direction and heading
+            num_candidates: Number of nearest candidates to check
+
+        Returns:
+            Dictionary containing route information or None if no route found
+        """
+        # Get all nearby routes first
+        all_routes = []
+        route_configs = [
+            (self.major_idx, self.major, RouteType.MAJOR),
+            (self.middle_idx, self.middle, RouteType.MIDDLE),
+            (self.minor_idx, self.minor, RouteType.MINOR)
+        ]
+
+        query_point = Point(lon, lat)
+        
+        for idx, routes, route_type in route_configs:
+            result = self._find_single_route(idx, routes, lon, lat, distance_threshold, num_candidates)
+            if result:
+                result['route_type'] = route_type
+                # Calculate route heading at the nearest point
+                route = result['route']
+                proj_point = result['nearest_point']
+                # Get next waypoints to determine direction
+                waypoints = self.get_next_waypoints(route, proj_point, heading, 1)
+                if waypoints:
+                    # Calculate heading to next waypoint
+                    route_heading = self._calculate_heading(
+                        (proj_point.x, proj_point.y),
+                        (waypoints[0].x, waypoints[0].y)
+                    )
+                    # Calculate heading difference
+                    heading_diff = abs(heading - route_heading)
+                    heading_diff = min(heading_diff, 360 - heading_diff)  # Account for circular nature of headings
+                    result['heading_diff'] = heading_diff
+                    result['route_heading'] = route_heading
+                    if heading_diff <= heading_threshold:
+                        all_routes.append(result)
+
+        if not all_routes:
+            return None
+
+        # Sort by priority (major > middle > minor) and then by distance
+        priority_map = {RouteType.MAJOR: 0, RouteType.MIDDLE: 1, RouteType.MINOR: 2}
+        sorted_routes = sorted(
+            all_routes,
+            key=lambda x: (priority_map[x['route_type']], x['distance_nm'])
+        )
+
+        return sorted_routes[0]
