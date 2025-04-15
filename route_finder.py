@@ -10,6 +10,10 @@ logger = logging.getLogger(__name__)
 
 DEFAULT_DATA = 'https://github.com/newzealandpaul/Shipping-Lanes/blob/main/data/Shipping_Lanes_v1.geojson?raw=true'
 
+HEADING_WEIGHT=0.9
+DISTANCE_WEIGHT=0.1
+
+
 class RouteType:
     MAJOR = "Major"
     MIDDLE = "Middle"
@@ -165,7 +169,6 @@ class RouteFinder:
         if min_distance <= distance_threshold:
             return {
                 'route_id': closest_id + 1,
-                'route': closest_route,
                 'proj_distance': closest_proj_distance,
                 'nearest_point': closest_point,
                 'distance_nm': min_distance
@@ -173,20 +176,256 @@ class RouteFinder:
 
         return None
     
-    def get_route_endpoints(self, route: LineString) -> Tuple[Tuple[float, float], Tuple[float, float]]:
-        """Get the start and end coordinates of a route."""
+    def _get_route_by_id(self, route_id: int, route_type: str = None) -> Optional[LineString]:
+        """
+        Get a route by ID and optionally by type.
+        
+        Args:
+            route_id: ID of the route (1-based index)
+            route_type: Optional type of route (MAJOR, MIDDLE, MINOR)
+            
+        Returns:
+            The route as a LineString or None if not found
+        """
+        # Adjust to 0-based index
+        idx = route_id - 1
+        
+        # If route type is specified, search only that type
+        if route_type:
+            if route_type == RouteType.MAJOR and 0 <= idx < len(self.major):
+                return self.major[idx]
+            elif route_type == RouteType.MIDDLE and 0 <= idx < len(self.middle):
+                return self.middle[idx]
+            elif route_type == RouteType.MINOR and 0 <= idx < len(self.minor):
+                return self.minor[idx]
+        # Otherwise search all types
+        else:
+            if 0 <= idx < len(self.major):
+                return self.major[idx]
+            elif 0 <= idx - len(self.major) < len(self.middle):
+                return self.middle[idx - len(self.major)]
+            elif 0 <= idx - len(self.major) - len(self.middle) < len(self.minor):
+                return self.minor[idx - len(self.major) - len(self.middle)]
+                
+        return None
+    
+    def get_route_endpoints(self, route_id: int, route_type: str = None) -> Dict[str, List[float]]:
+        """
+        Get the start and end coordinates of a route by ID.
+        
+        Args:
+            route_id: ID of the route (1-based index)
+            route_type: Optional route type (MAJOR, MIDDLE, MINOR). If None, will search all types.
+            
+        Returns:
+            Dictionary with start and end coordinates {
+                'start': [lon, lat],
+                'end': [lon, lat]
+            }
+        """
+        route = self._get_route_by_id(route_id, route_type)
+        if route is None:
+            return None
+            
         coords = list(route.coords)
-        return coords[0], coords[-1]
+        return {
+            'start': list(coords[0]),
+            'end': list(coords[-1])
+        }
 
     
     def get_next_waypoints(self, 
+        route_id: int,
+        lon: float,
+        lat: float,
+        heading: float,
+        num_waypoints: int = 5,
+        route_type: str = None
+    ) -> List[List[float]]:
+        """
+        Get the next waypoints along a route based on current position and heading.
+
+        Args:
+            route_id: ID of the route (1-based index)
+            lon: Longitude coordinate of current position
+            lat: Latitude coordinate of current position
+            heading: Current heading in degrees (0-360)
+            num_waypoints: Number of next waypoints to return (default: 5)
+            route_type: Optional route type (MAJOR, MIDDLE, MINOR)
+
+        Returns:
+            List of waypoints as [lon, lat] coordinates
+        """
+        route = self._get_route_by_id(route_id, route_type)
+        if route is None:
+            return []
+            
+        point = Point(lon, lat)
+        
+        # Project the point onto the route to get the exact location
+        proj_distance = route.project(point)
+        coords = list(route.coords)
+        
+        # Find the segment we're currently on
+        current_segment_idx = 0
+        current_distance = 0
+        segment_distances = []
+        
+        # Calculate cumulative distances along the route
+        for i in range(len(coords) - 1):
+            segment = LineString([coords[i], coords[i + 1]])
+            distance = segment.length
+            segment_distances.append(current_distance + distance)
+            if current_distance <= proj_distance <= current_distance + distance:
+                current_segment_idx = i
+            current_distance += distance
+            
+        # Determine direction based on heading and route orientation
+        forward_direction = True
+        if current_segment_idx < len(coords) - 1:
+            segment_heading = RouteFinder._calculate_heading(
+                coords[current_segment_idx],
+                coords[current_segment_idx + 1]
+            )
+            # If the difference between current heading and segment heading is > 90°,
+            # we're likely going in the opposite direction
+            heading_diff = abs(heading - segment_heading)
+            if heading_diff > 90 and heading_diff < 270:
+                forward_direction = False
+                
+        waypoints = []
+        if forward_direction:
+            # Get next points in forward direction
+            for i in range(current_segment_idx + 1, min(len(coords), current_segment_idx + num_waypoints + 1)):
+                waypoints.append(list(coords[i]))
+        else:
+            # Get next points in reverse direction
+            for i in range(current_segment_idx, max(-1, current_segment_idx - num_waypoints), -1):
+                waypoints.append(list(coords[i]))
+                
+        return waypoints[:num_waypoints]
+
+    @staticmethod
+    def _calculate_heading(start_coord: Tuple[float, float], end_coord: Tuple[float, float]) -> float:
+        """
+        Calculate the heading between two coordinates.
+        
+        Args:
+            start_coord: Starting coordinate (lon, lat)
+            end_coord: Ending coordinate (lon, lat)
+            
+        Returns:
+            Heading in degrees (0-360)
+        """
+        import math
+        
+        start_lon, start_lat = start_coord
+        end_lon, end_lat = end_coord
+        
+        # Convert to radians
+        lat1 = math.radians(start_lat)
+        lat2 = math.radians(end_lat)
+        diff_lon = math.radians(end_lon - start_lon)
+        
+        # Calculate heading
+        x = math.sin(diff_lon) * math.cos(lat2)
+        y = math.cos(lat1) * math.sin(lat2) - (math.sin(lat1) * math.cos(lat2) * math.cos(diff_lon))
+        bearing = math.atan2(x, y)
+        
+        # Convert to degrees
+        heading = math.degrees(bearing)
+        
+        # Normalize to 0-360
+        return (heading + 360) % 360
+    
+    def find_nearest_route_with_heading(
+        self,
+        lon: float,
+        lat: float,
+        heading: float,
+        distance_threshold: float = 5,
+        heading_threshold: float = 5,
+        num_candidates: int = 10
+    ) -> Optional[Dict]:
+        """
+        Find the nearest shipping route to the given coordinates that aligns with the provided heading.
+
+        Args:
+            lon: Longitude coordinate
+            lat: Latitude coordinate
+            heading: Current heading in degrees (0-360)
+            distance_threshold: Maximum distance in nautical miles to consider a route
+            heading_threshold: Maximum allowed difference in degrees between route direction and heading
+            num_candidates: Number of nearest candidates to check
+
+        Returns:
+            Dictionary containing route information or None if no route found
+        """
+        # Get all nearby routes first
+        all_routes = []
+        route_configs = [
+            (self.major_idx, self.major, RouteType.MAJOR),
+            (self.middle_idx, self.middle, RouteType.MIDDLE),
+            (self.minor_idx, self.minor, RouteType.MINOR)
+        ]
+
+        query_point = Point(lon, lat)
+        for idx, routes, route_type in route_configs:
+            result = self._find_single_route(idx, routes, lon, lat, distance_threshold, num_candidates)
+            if result:
+                result['route_type'] = route_type
+                route_id = result['route_id']
+                route = self._get_route_by_id(route_id, route_type)
+                # Convert nearest_point to [lon, lat] list if it's a Point
+                nearest_point = result['nearest_point']
+                if hasattr(nearest_point, 'x') and hasattr(nearest_point, 'y'):
+                    nearest_point_coords = [nearest_point.x, nearest_point.y]
+                else:
+                    nearest_point_coords = list(nearest_point)
+                result['nearest_point'] = nearest_point_coords
+                proj_point = Point(nearest_point_coords[0], nearest_point_coords[1])
+                shapely_waypoints = self._get_next_waypoints_internal(route, proj_point, heading, 1)
+                if shapely_waypoints:
+                    route_heading = self._calculate_heading(
+                        (proj_point.x, proj_point.y),
+                        (shapely_waypoints[0].x, shapely_waypoints[0].y)
+                    )
+                    heading_diff = abs(heading - route_heading)
+                    heading_diff = min(heading_diff, 360 - heading_diff)
+                    result['heading_diff'] = heading_diff
+                    result['route_heading'] = route_heading
+                    endpoints = self.get_route_endpoints(route_id, route_type)
+                    if heading_diff <= heading_threshold:
+                        result['starting_point'] = endpoints['end']
+                        result['ending_point'] = endpoints['start']
+                    else:
+                        result['starting_point'] = endpoints['start']
+                        result['ending_point'] = endpoints['end']
+                    if heading_diff <= heading_threshold:
+                        all_routes.append(result)
+
+        if not all_routes:
+            return None
+
+        priority_map = {RouteType.MAJOR: 0, RouteType.MIDDLE: 1, RouteType.MINOR: 2}
+        
+        sorted_routes = sorted(
+            all_routes,
+            key=lambda x: ( (x['heading_diff'] * HEADING_WEIGHT + x['distance_nm'] * DISTANCE_WEIGHT) / 2.0 )
+        )
+        
+        logger.info(f"\n\nSorted routes: {sorted_routes[:4]}\n\n")
+
+        return sorted_routes[0]
+    
+    def _get_next_waypoints_internal(self, 
         route: LineString,
         point: Point,
         heading: float,
         num_waypoints: int
     ) -> List[Point]:
         """
-        Get the next waypoints along a route based on current position and heading.
+        Internal method to get the next waypoints along a route (returns Shapely objects for internal use).
 
         Args:
             route: A LineString representing the shipping route
@@ -239,119 +478,3 @@ class RouteFinder:
                 waypoints.append(Point(coords[i]))
                 
         return waypoints[:num_waypoints]
-
-    @staticmethod
-    def _calculate_heading(start_coord: Tuple[float, float], end_coord: Tuple[float, float]) -> float:
-        """
-        Calculate the heading between two coordinates.
-        
-        Args:
-            start_coord: Starting coordinate (lon, lat)
-            end_coord: Ending coordinate (lon, lat)
-            
-        Returns:
-            Heading in degrees (0-360)
-        """
-        import math
-        
-        start_lon, start_lat = start_coord
-        end_lon, end_lat = end_coord
-        
-        # Convert to radians
-        lat1 = math.radians(start_lat)
-        lat2 = math.radians(end_lat)
-        diff_lon = math.radians(end_lon - start_lon)
-        
-        # Calculate heading
-        x = math.sin(diff_lon) * math.cos(lat2)
-        y = math.cos(lat1) * math.sin(lat2) - (math.sin(lat1) * math.cos(lat2) * math.cos(diff_lon))
-        bearing = math.atan2(x, y)
-        
-        # Convert to degrees
-        heading = math.degrees(bearing)
-        
-        # Normalize to 0-360
-        return (heading + 360) % 360
-    
-    def find_nearest_route_with_heading(
-        self,
-        lon: float,
-        lat: float,
-        heading: float,
-        distance_threshold: float = 50,
-        heading_threshold: float = 45,
-        num_candidates: int = 10
-    ) -> Optional[Dict]:
-        """
-        Find the nearest shipping route to the given coordinates that aligns with the provided heading.
-
-        Args:
-            lon: Longitude coordinate
-            lat: Latitude coordinate
-            heading: Current heading in degrees (0-360)
-            distance_threshold: Maximum distance in nautical miles to consider a route
-            heading_threshold: Maximum allowed difference in degrees between route direction and heading
-            num_candidates: Number of nearest candidates to check
-
-        Returns:
-            Dictionary containing route information or None if no route found
-        """
-        # Get all nearby routes first
-        all_routes = []
-        route_configs = [
-            (self.major_idx, self.major, RouteType.MAJOR),
-            (self.middle_idx, self.middle, RouteType.MIDDLE),
-            (self.minor_idx, self.minor, RouteType.MINOR)
-        ]
-
-        query_point = Point(lon, lat)
-        
-        for idx, routes, route_type in route_configs:
-            result = self._find_single_route(idx, routes, lon, lat, distance_threshold, num_candidates)
-            if result:
-                result['route_type'] = route_type
-                # Calculate route heading at the nearest point
-                route = result['route']
-                proj_point = result['nearest_point']
-                # Get next waypoints to determine direction
-                waypoints = self.get_next_waypoints(route, proj_point, heading, 1)
-                if waypoints:
-                    # Calculate heading to next waypoint
-                    route_heading = self._calculate_heading(
-                        (proj_point.x, proj_point.y),
-                        (waypoints[0].x, waypoints[0].y)
-                    )
-                    # Calculate heading difference
-                    heading_diff = abs(heading - route_heading)
-                    heading_diff = min(heading_diff, 360 - heading_diff)  # Account for circular nature of headings
-                    result['heading_diff'] = heading_diff
-                    result['route_heading'] = route_heading
-                    
-                    # add the route start and end to the result. Note that if the provided heading is going backwards, the start and end will be swapped.
-                    start, end = self.get_route_endpoints(route)
-                    if heading_diff <= heading_threshold:
-                        result['starting-point'] = end
-                        result['ending-point'] = start
-                    else:
-                        # If the route is going backwards, swap start and end
-                        result['starting-point'] = start
-                        result['ending-point'] = end               
-                    
-                    if heading_diff <= heading_threshold:
-                        all_routes.append(result)
-
-        if not all_routes:
-            return None
-
-        priority_map = {RouteType.MAJOR: 0, RouteType.MIDDLE: 1, RouteType.MINOR: 2}
-        
-        sorted_routes = sorted(
-            all_routes,
-            #key=lambda x: (priority_map[x['route_type']], x['distance_nm'])
-            key=lambda x: (x['distance_nm'],x['heading_diff'] )
-        )
-
-        print (f"Sorted routes: {sorted_routes[:2]}")
-
-
-        return sorted_routes[0]
