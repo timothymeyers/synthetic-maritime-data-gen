@@ -343,8 +343,8 @@ class RouteFinder:
         lon: float,
         lat: float,
         heading: float,
-        distance_threshold: float = 5,
-        heading_threshold: float = 5,
+        distance_threshold: float = 50.0,
+        heading_threshold: float = 10.0,
         num_candidates: int = 10
     ) -> Optional[Dict]:
         """
@@ -478,3 +478,151 @@ class RouteFinder:
                 waypoints.append(Point(coords[i]))
                 
         return waypoints[:num_waypoints]
+    
+    def get_next_waypoints_timeframe(self,
+        lon: float,
+        lat: float,
+        heading: float,
+        speed_knots: float,
+        timeframe_hours: float,
+        heading_change_limit: float = 12.0,
+        heading_threshold: float = 10.0,
+        distance_threshold: float = 50.0
+    ) -> List[List[float]]:
+        """
+        Simulate ship movement from current position to nearest route and along the route for a given timeframe.
+        Args:
+            lon: Current longitude
+            lat: Current latitude
+            heading: Current heading in degrees (0-360)
+            speed_knots: Current speed in knots
+            timeframe_hours: Total time to simulate, in hours
+            heading_change_limit: Maximum heading change per hour (degrees)
+            heading_threshold: Maximum allowed difference in degrees between route direction and heading
+            distance_threshold: Maximum distance in nautical miles to consider a route
+        Returns:
+            List of [lon, lat] waypoints, one per hour
+        """
+        import math
+        
+        waypoints = []
+        current_point = Point(lon, lat)
+        current_heading = heading
+        hours = int(math.ceil(timeframe_hours))
+        distance_per_hour = speed_knots  # nautical miles per hour
+        on_route = False
+        route_info = self.find_nearest_route_with_heading(
+            lon, lat, heading,
+            distance_threshold=distance_threshold,
+            heading_threshold=heading_threshold
+        )
+        if not route_info:
+            return []
+        route_id = route_info['route_id']
+        route_type = route_info['route_type']
+        route = self._get_route_by_id(route_id, route_type)
+        if route is None:
+            return []
+        # Find nearest point on route
+        proj_distance = route.project(current_point)
+        nearest_point = route.interpolate(proj_distance)
+        # Determine if already on route (within 0.05 nm ~ 90m)
+        if current_point.distance(nearest_point) * 60 < 0.05:
+            on_route = True
+        for t in range(hours):
+            # If not on route, move toward nearest point, adjusting heading gradually
+            if not on_route:
+                # Calculate desired heading to nearest point
+                dx = nearest_point.x - current_point.x
+                dy = nearest_point.y - current_point.y
+                desired_heading = self._calculate_heading((current_point.x, current_point.y), (nearest_point.x, nearest_point.y))
+                # Calculate heading difference
+                heading_diff = (desired_heading - current_heading + 540) % 360 - 180  # shortest signed diff
+                # Limit heading change
+                if abs(heading_diff) > heading_change_limit:
+                    heading_step = heading_change_limit if heading_diff > 0 else -heading_change_limit
+                else:
+                    heading_step = heading_diff
+                current_heading = (current_heading + heading_step) % 360
+                # Move ship
+                rad = math.radians(current_heading)
+                # Approximate 1 nm = 1/60 degree (lat/lon)
+                dlon = math.cos(rad) * distance_per_hour / 60.0
+                dlat = math.sin(rad) * distance_per_hour / 60.0
+                new_lon = current_point.x + dlon
+                new_lat = current_point.y + dlat
+                current_point = Point(new_lon, new_lat)
+                waypoints.append([current_point.x, current_point.y])
+                # Recompute nearest point
+                proj_distance = route.project(current_point)
+                nearest_point = route.interpolate(proj_distance)
+                if current_point.distance(nearest_point) * 60 < 0.05:
+                    on_route = True
+                    # Snap to route
+                    current_point = nearest_point
+                    waypoints[-1] = [current_point.x, current_point.y]
+                    # Determine route direction
+                    coords = list(route.coords)
+                    seg_idx = 0
+                    cum_dist = 0
+                    for i in range(len(coords) - 1):
+                        seg = LineString([coords[i], coords[i+1]])
+                        seg_len = seg.length
+                        if cum_dist <= proj_distance <= cum_dist + seg_len:
+                            seg_idx = i
+                            break
+                        cum_dist += seg_len
+                    # Decide forward/reverse
+                    seg_heading = self._calculate_heading(coords[seg_idx], coords[seg_idx+1])
+                    seg_heading_diff = (seg_heading - current_heading + 540) % 360 - 180
+                    forward = True if abs(seg_heading_diff) <= 90 else False
+                    route_progress = {'coords': coords, 'seg_idx': seg_idx, 'forward': forward, 'proj_distance': proj_distance}
+            else:
+                # Move along the route
+                if 'route_progress' not in locals():
+                    coords = list(route.coords)
+                    proj_distance = route.project(current_point)
+                    seg_idx = 0
+                    cum_dist = 0
+                    for i in range(len(coords) - 1):
+                        seg = LineString([coords[i], coords[i+1]])
+                        seg_len = seg.length
+                        if cum_dist <= proj_distance <= cum_dist + seg_len:
+                            seg_idx = i
+                            break
+                        cum_dist += seg_len
+                    seg_heading = self._calculate_heading(coords[seg_idx], coords[seg_idx+1])
+                    seg_heading_diff = (seg_heading - current_heading + 540) % 360 - 180
+                    forward = True if abs(seg_heading_diff) <= 90 else False
+                    route_progress = {'coords': coords, 'seg_idx': seg_idx, 'forward': forward, 'proj_distance': proj_distance}
+                # Move distance_per_hour along the route
+                route_line = LineString(route_progress['coords'])
+                if route_progress['forward']:
+                    new_proj = route_progress['proj_distance'] + (distance_per_hour / 60.0)
+                    if new_proj > route_line.length:
+                        new_proj = route_line.length
+                    current_point = route_line.interpolate(new_proj)
+                    route_progress['proj_distance'] = new_proj
+                else:
+                    new_proj = route_progress['proj_distance'] - (distance_per_hour / 60.0)
+                    if new_proj < 0:
+                        new_proj = 0
+                    current_point = route_line.interpolate(new_proj)
+                    route_progress['proj_distance'] = new_proj
+                # Update heading toward next segment
+                seg_idx = route_progress['seg_idx']
+                coords = route_progress['coords']
+                if route_progress['forward'] and seg_idx < len(coords) - 2:
+                    next_heading = self._calculate_heading(coords[seg_idx+1], coords[seg_idx+2])
+                elif not route_progress['forward'] and seg_idx > 0:
+                    next_heading = self._calculate_heading(coords[seg_idx], coords[seg_idx-1])
+                else:
+                    next_heading = current_heading
+                heading_diff = (next_heading - current_heading + 540) % 360 - 180
+                if abs(heading_diff) > heading_change_limit:
+                    heading_step = heading_change_limit if heading_diff > 0 else -heading_change_limit
+                else:
+                    heading_step = heading_diff
+                current_heading = (current_heading + heading_step) % 360
+                waypoints.append([current_point.x, current_point.y])
+        return waypoints
