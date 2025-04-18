@@ -347,6 +347,8 @@ class BetterRouteFinder:
         ]
         
         for idx, routes, route_type in route_configs:
+            if idx is None:
+                continue  # Skip if index is not set
             result = self._find_single_route(idx, routes, lon, lat, distance_threshold, num_candidates)
             if result:
                 result['route_type'] = route_type
