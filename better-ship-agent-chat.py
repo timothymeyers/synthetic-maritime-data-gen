@@ -1,11 +1,10 @@
 import asyncio
-import json
 import os
 import logging
-from typing import List, Sequence
-
+from typing import List, Optional, Sequence
 
 from dotenv import load_dotenv
+from maritime import WaypointInfo
 
 from autogen_agentchat.agents import AssistantAgent, UserProxyAgent
 from autogen_agentchat.teams import RoundRobinGroupChat
@@ -13,7 +12,6 @@ from autogen_agentchat.ui import Console
 from autogen_core.tools import FunctionTool
 from autogen_ext.models.openai import OpenAIChatCompletionClient, AzureOpenAIChatCompletionClient
 
-import searoute as sr
 from better_route_finder import BetterRouteFinder
 
 load_dotenv()
@@ -33,9 +31,9 @@ def create_4o_mini_model_client() -> OpenAIChatCompletionClient:
     
 # what is the ship's route from [0.3515625, 50.064191736659104] to [117.42187500000001, 39.36827914916014]
 
-async def get_ship_waypoints_unknown_route (longitude: float, latitude: float, heading: float, speed_knots: float, interval_hrs: int, num_waypoints: int = None )  -> json:
-    """Get the ship waypoints based on the given coordinates."""
-    logger.info(f"\n\n\nGetting ship waypoints from {longitude}, {latitude} with heading {heading}, speed {speed_knots}, interval {interval_hrs}, num_waypoints {num_waypoints}\n\n\n")
+async def get_ship_waypoints_unknown_route(longitude: float, latitude: float, heading: float, speed_knots: float, interval_hrs: int, num_waypoints: int = None) -> Optional[WaypointInfo]:
+    """Get the ship waypoints based on the given coordinates and heading."""
+    logger.info(f"\n\n\nGetting ship waypoints from {longitude}, {latitude} with heading {heading}, speed {speed_knots}, interval {interval_hrs}\n\n\n")
     
     route = finder.get_next_waypoints_with_speed_and_heading_unknown_route(longitude, latitude, heading, speed_knots, interval_hrs, num_waypoints)
     if route is not None:
@@ -45,9 +43,9 @@ async def get_ship_waypoints_unknown_route (longitude: float, latitude: float, h
         logger.warning("No route found.")
         return None
     
-async def get_ship_waypoints_known_route (longitude: float, latitude: float, dest_longitude:float, dest_latitude: float, heading: float, speed_knots: float, interval_hrs: int, num_waypoints: int = None) -> json:
-    """Get the ship waypoints based on the given coordinates."""
-    logger.info(f"\n\n\nGetting ship waypoints from {longitude}, {latitude} to {dest_longitude}, {dest_latitude} with heading {heading}, speed {speed_knots}, interval {interval_hrs}, num_waypoints {num_waypoints}\n\n\n")
+async def get_ship_waypoints_known_route(longitude: float, latitude: float, dest_longitude: float, dest_latitude: float, heading: float, speed_knots: float, interval_hrs: int, num_waypoints: int = None) -> Optional[WaypointInfo]:
+    """Get the ship waypoints based on the given coordinates and destination."""
+    logger.info(f"\n\n\nGetting ship waypoints from {longitude}, {latitude} to {dest_longitude}, {dest_latitude} with heading {heading}, speed {speed_knots}, interval {interval_hrs}\n\n\n")
     
     route = finder.get_next_waypoints_with_speed_and_heading_known_destination(longitude, latitude, dest_longitude, dest_latitude, heading, speed_knots, interval_hrs, num_waypoints)
     if route is not None:
@@ -65,7 +63,16 @@ async def main() -> None:
     betterRouteFinderAgent = AssistantAgent (
         name="BetterRouteFinderAgent",
         model_client=client,
-        description="A ship expert who answers questions using only data from available tools. Respond in clear, concise, and accurate English. Do not make assumptions or inferences. Always report the ROUTE ID Number Never return JSON.",
+        description="""A maritime route finding expert who provides guidance using available tools. 
+        Will return route information including:
+        - Current position, heading, and speed
+        - List of waypoints along the route
+        - Whether the route ends at a port
+        - Total route distance and duration
+        
+        Responds in clear, concise English with accurate maritime terminology.
+        Validates all inputs and reports any issues with coordinates, heading, or speed.
+        Always includes relevant route identifiers and key navigation details.""",
         reflect_on_tool_use=True,
         
         tools=[

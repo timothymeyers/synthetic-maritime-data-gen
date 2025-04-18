@@ -28,6 +28,8 @@ class WaypointCalculator:
         """
         logger.debug(f"Getting waypoints for route with speed {speed_knot} knots and time {time_hrs} hours")
         
+        num_waypoints = WaypointCalculator.get_num_waypoints(route, speed_knot, time_hrs, num_waypoints)
+        
         # Calculate distance in nautical miles
         distance_nm_total = speed_knot * time_hrs * num_waypoints
         logger.debug(f"Total distance to cover: {distance_nm_total}nm")
@@ -61,10 +63,18 @@ class WaypointCalculator:
                     coords[idx][0], coords[idx][1],
                     remaining_distance
                 )
+                
                 waypoints.append((x, y))
                 current_coord = [x, y]
                 distance_nm_total -= remaining_distance
                 remaining_distance = distance_per_waypoint
+        
+        
+        # for every waypoint, make sure the longitude is between -180 and 180.
+        for i in range(len(waypoints)):
+            lon, lat = waypoints[i]
+            lon = (lon + 180) % 360 - 180
+            waypoints[i] = (lon, lat)
             
         return waypoints
 
@@ -127,3 +137,18 @@ class WaypointCalculator:
                 waypoints.append(Point(coords[i]))
                 
         return waypoints[:num_waypoints]
+
+    @staticmethod
+    def get_num_waypoints(route: LineString, speed_knot: float, time_hrs: float, num_waypoints: Optional[int] = None) -> int:
+    
+        if num_waypoints is None or num_waypoints <= 0:
+            logger.info("Number of waypoints is not specified or invalid, defaulting to ALL available waypoints")
+            distance_km = route['properties']['length']
+            logger.debug(f"\tRoute units: {route['properties']['units']} ")
+            distance_nm = distance_km / 1.852
+            logger.debug(f"\tRoute length: {distance_km} km and {distance_nm} nm")
+            num_waypoints = int(distance_nm / (speed_knot * time_hrs)) + 1
+            logger.debug(f"\tNumber of waypoints calculated: {num_waypoints}")
+        
+        return num_waypoints
+    
