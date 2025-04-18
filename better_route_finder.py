@@ -14,7 +14,7 @@ from shapely.geometry import shape, MultiLineString, LineString, Point
 from geopy.distance import geodesic
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, 
+logging.basicConfig(level=logging.DEBUG, 
                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -169,19 +169,17 @@ class BetterRouteFinder:
         # Run the query
             gdf = ox.features_from_point((lat, lon), tags=tags, dist=radius)
         except InsufficientResponseError as e:
-            logger.error(f"Error querying ports: {str(e)}")
+            logger.debug(f"Error querying ports: {str(e)}")
             return False
         except Exception as e:
-            logger.error(f"Unexpected error querying ports: {str(e)}")
+            logger.warning(f"Unexpected error querying ports: {str(e)}")
             return False
 
         # Check if any ports are found
         if not gdf.empty:
-            print("✅ Port(s) found nearby!")
-            print(gdf)
+            logger.info("✅ Port(s) found nearby!")
             return True
-        else:
-            print("❌ No ports found within radius.")
+           
         
         return False
     
@@ -293,6 +291,49 @@ class BetterRouteFinder:
             'route_start': start,
             'route_end': end,     
         }
+     
+    def get_next_waypoints_with_speed_and_heading_unknown_route_improved (
+        self,
+        lon: float,
+        lat: float,
+        heading: float,
+        speed_knot: float,
+        time_hrs: float,
+        num_waypoints: int = None
+    ) :
+        """
+        Don't use yet. This is in progress. Many shipping lanes do not end at a port, so I am trying to chain them. 
+        They also do not always stop at a port and instead just go on by. 
+        E.g. MAJ ROUTE 12 stops off the coast of California. It is connected to MAJ ROUTE 30 which then goes past
+        the Port of LA and then to the Port of San Diego. No route stops at the Port of LA.
+        """    
+        
+        at_port = False
+        routes = []
+        
+        while not at_port:
+            logger.debug("-" *40)
+            route = self.get_next_waypoints_with_speed_and_heading_unknown_route(
+                lon, lat, heading, speed_knot, time_hrs, num_waypoints
+            )
+            
+            if route is None:
+                logger.warning("No route found")
+                return []
+            
+            routes.append(route)
+            
+            # Check if the route ends at a port
+            at_port = route['end_at_port']
+            lon, lat = route['route_end'][0], route['route_end'][1]
+            #Calclate heading between last waypoint and route end
+            heading = self._calculate_heading(
+                (route['waypoints'][-1][0], route['waypoints'][-1][1]),
+                (route['route_end'][0], route['route_end'][1])
+            )
+            
+            
+            
         
     
     def get_next_waypoints_with_speed_and_heading_unknown_route (
@@ -359,6 +400,7 @@ class BetterRouteFinder:
         start = route['geometry']['coordinates'][0]
         end = route['geometry']['coordinates'][-1]
         
+        end_at_port = self.is_near_port(end[0], end[1], 25)
         
         logger.debug(f"Next waypoints: {waypoints}")
         return {
@@ -369,7 +411,8 @@ class BetterRouteFinder:
             'observed_hrs': time_hrs,
             'num_observations': num_waypoints,            
             'route_start': start,
-            'route_end': end,     
+            'route_end': end,
+            'end_at_port': end_at_port,
         }
     
     def find_nearest_route_with_heading(

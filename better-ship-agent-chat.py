@@ -18,7 +18,7 @@ from better_route_finder import BetterRouteFinder
 
 load_dotenv()
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 finder = BetterRouteFinder()
