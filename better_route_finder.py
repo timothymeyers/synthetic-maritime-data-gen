@@ -214,7 +214,7 @@ class BetterRouteFinder:
         heading: float,
         speed_knot: float,
         time_hrs: float,
-        num_waypoints: int
+        num_waypoints: int = None
     ):
         """
         """
@@ -226,6 +226,16 @@ class BetterRouteFinder:
             logger.warning("No route found")
             return []
         # Get the waypoints along the route
+        
+        if num_waypoints is None or num_waypoints <= 0:
+            logger.info("Number of waypoints is not specified or invalid, defaulting to ALL available waypoints")
+            distance_km = route['properties']['length']
+            logger.debug(f"\tRoute units: {route['properties']['units']} ")
+            distance_nm = distance_km / 1.852
+            logger.debug(f"\tRoute length: {distance_km} km and {distance_nm} nm")
+            num_waypoints = int(distance_nm / (speed_knot * time_hrs)) + 1
+            logger.debug(f"\tNumber of waypoints calculated: {num_waypoints}")
+        
         waypoints = self.get_waypoints(route, speed_knot, time_hrs, num_waypoints)
         start = route['geometry']['coordinates'][0]
         end = route['geometry']['coordinates'][-1]
@@ -249,7 +259,7 @@ class BetterRouteFinder:
         heading: float,
         speed_knot: float,
         time_hrs: float,
-        num_waypoints: int
+        num_waypoints: int = None
     ) :
         """Get the next waypoints along a route based on speed and heading.
         
@@ -293,7 +303,13 @@ class BetterRouteFinder:
                 distance_threshold = min(distance_threshold + 25, max_distance_threshold)
                 heading_threshold = min(heading_threshold + 5, max_heading_threshold)
               
-        
+        if num_waypoints is None or num_waypoints <= 0:
+            logger.info("Number of waypoints is not specified or invalid, defaulting to ALL available waypoints")
+            distance_km = route['properties']['length']
+            logger.debug(f"\tRoute units: {route['properties']['units']} ")
+            distance_nm = distance_km / 1.852
+            num_waypoints = int(distance_nm / (speed_knot * time_hrs)) +1
+            logger.debug(f"\tNumber of waypoints calculated: {num_waypoints}")
         
         # Get the waypoints along the route
         waypoints = self.get_waypoints(route, speed_knot, time_hrs, num_waypoints)
@@ -586,7 +602,7 @@ class BetterRouteFinder:
         logger.debug(f"\tRoute endpoints: start={endpoints['start']}, end={endpoints['end']}")
         return endpoints
 
-    def get_waypoints(self, route: json, speed_knot: float, time_hrs: float, num_waypoints: float):
+    def get_waypoints(self, route: json, speed_knot: float, time_hrs: float, num_waypoints: float = None):
         """Get waypoints along a route based on speed and time.
         
         Args:
@@ -596,12 +612,14 @@ class BetterRouteFinder:
             num_waypoints: Number of waypoints to return
         """
         logger.debug(f"Getting waypoints for route with speed {speed_knot} knots and time {time_hrs} hours")
+        logger.debug(f"Route: {route}")
         
         # Calculate distance in nautical miles
-        distance_nm_total = speed_knot * time_hrs
+        distance_nm_total = speed_knot * time_hrs*num_waypoints
         logger.debug(f"Distance to cover: {distance_nm_total}nm")
         
-        distance_per_waypoint = distance_nm_total / num_waypoints
+            
+        distance_per_waypoint = speed_knot * time_hrs
         logger.debug(f"Distance per waypoint: {distance_per_waypoint}nm")
         remaining_distance = distance_per_waypoint
         
@@ -614,39 +632,39 @@ class BetterRouteFinder:
         
         idx = 1
         
-        for i in range(1, len(coords)):           
+        while current_coord != coords[-1]:
+            if idx >= len(coords):
+                logger.debug("\tReached the end of coordinates.")
+                break
+
             segment = LineString([current_coord, coords[idx]])
-            segment_length_nm = segment.length * 53.4  # Convert degrees to nautical miles
+            segment_length_nm = segment.length * 60  # Convert degrees to nautical miles
             logger.debug(f"\tChecking segment from {current_coord} to {coords[idx]}: distance {segment_length_nm}nm and remaining distance: {remaining_distance}nm")
-            
+
             if segment_length_nm < remaining_distance:
                 logger.debug(f"\t\tSegment length is less than remaining distance.")
-                #waypoints.append(coords[i])
-                
                 remaining_distance -= segment_length_nm
                 current_coord = coords[idx]
                 idx += 1
+                distance_nm_total -= segment_length_nm
             else:
                 logger.debug(f"\t\tSegment length is greater than remaining distance. Calculating bisected point")
                 x, y = self._get_bisected_point(current_coord[0], current_coord[1], coords[idx][0], coords[idx][1], remaining_distance)
                 logger.debug(f"\t\tAdding Bisected point as waypoint: ({x}, {y})")
                 waypoints.append((x, y))
                 current_coord = [x, y]
+                distance_nm_total -= remaining_distance
                 remaining_distance = distance_per_waypoint
+
+            logger.debug(f"\tindex: {idx}, current coord: {current_coord}, len(coords): {len(coords)}")
+            logger.debug(f"\tTotal remaining distance: {distance_nm_total}nm")
             
-            if len(waypoints) >= num_waypoints:
-                logger.debug(f"\tReached maximum number of waypoints: {num_waypoints}")
-                break
-                
+            #if len(waypoints) >= num_waypoints:
+            ##    logger.debug(f"\tReached maximum number of waypoints: {num_waypoints}")
+            #    break
             
-                
-                
-                
-                
-            
-        
-            
-        
+            logger.debug(f"\tCurrent # of waypoints: {len(waypoints)}")
+                        
         logger.debug(f"Waypoints: {waypoints}")
         return waypoints
         
