@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>EVER MAST Shipping Route</name>
+    <Placemark>
+      <name>Starting Position - Kodiak</name>
+      <Point>
+        <coordinates>-152.00,45.00,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 1</name>
+      <Point>
+        <coordinates>-151.875176,45.092574,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 2</name>
+      <Point>
+        <coordinates>-151.639205,45.051732,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Port San Luis</name>
+      <Point>
+        <coordinates>-120.75,35.166667,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Ending Position - Port of Los Angeles</name>
+      <Point>
+        <coordinates>-118.2710,33.7434,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Route Line</name>
+      <LineString>
+        <coordinates>
+          -152.00,45.00
+          -151.875176,45.092574
+          -151.639205,45.051732
+          -120.75,35.166667
+          -118.2710,33.7434
+        </coordinates>
+      </LineString>
+    </Placemark>
+  </Document>
+</kml>

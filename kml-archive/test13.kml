@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>EVER MAST Route to Port of Los Angeles</name>
+    
+    <Placemark>
+      <name>Current Position (Heading: 106)</name>
+      <Point>
+        <coordinates>-152.0,45.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 1 00:00</name>
+      <Point>
+        <coordinates>-151.073,44.003</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 1 12:00</name>
+      <Point>
+        <coordinates>-149.064,43.314</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 2 00:00</name>
+      <Point>
+        <coordinates>-147.002,42.606</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 2 12:00</name>
+      <Point>
+        <coordinates>-144.939,41.898</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 3 00:00</name>
+      <Point>
+        <coordinates>-143.048,41.248</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 3 12:00</name>
+      <Point>
+        <coordinates>-141.156,40.599</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 4 00:00</name>
+      <Point>
+        <coordinates>-139.208,39.821</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 4 12:00</name>
+      <Point>
+        <coordinates>-137.061,39.336</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 5 00:00</name>
+      <Point>
+        <coordinates>-134.880,38.840</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 5 12:00</name>
+      <Point>
+        <coordinates>-132.945,38.306</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 6 00:00</name>
+      <Point>
+        <coordinates>-130.923,37.749</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 6 12:00</name>
+      <Point>
+        <coordinates>-128.910,37.135</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 7 00:00</name>
+      <Point>
+        <coordinates>-126.791,36.445</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 7 12:00</name>
+      <Point>
+        <coordinates>-124.677,35.727</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Final Destination: Port of Los Angeles</name>
+      <Point>
+        <coordinates>-118.2625,33.73</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Route</name>
+      <LineString>
+        <coordinates>
+          -152.0,45.0
+          -151.073,44.003
+          -149.064,43.314
+          -147.002,42.606
+          -144.939,41.898
+          -143.048,41.248
+          -141.156,40.599
+          -139.208,39.821
+          -137.061,39.336
+          -134.880,38.840
+          -132.945,38.306
+          -130.923,37.749
+          -128.910,37.135
+          -126.791,36.445
+          -124.677,35.727
+          -118.2625,33.73
+        </coordinates>
+      </LineString>
+    </Placemark>
+  
+  </Document>
+</kml>

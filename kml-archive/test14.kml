@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Ship Waypoints</name>
+    
+    <Placemark>
+      <name>Current Position (Heading 106)</name>
+      <Point>
+        <coordinates>-152.0,45.0,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>12 hrs</name>
+      <Point>
+        <coordinates>-151.1432,44.0274,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>24 hrs</name>
+      <Point>
+        <coordinates>-149.2516,43.3780,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>36 hrs</name>
+      <Point>
+        <coordinates>-147.3600,42.7286,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>48 hrs</name>
+      <Point>
+        <coordinates>-145.4684,42.0792,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>60 hrs</name>
+      <Point>
+        <coordinates>-143.5767,41.4297,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>72 hrs</name>
+      <Point>
+        <coordinates>-141.6851,40.7803,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>84 hrs</name>
+      <Point>
+        <coordinates>-139.8972,39.9768,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>96 hrs</name>
+      <Point>
+        <coordinates>-137.9463,39.5362,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>108 hrs</name>
+      <Point>
+        <coordinates>-135.9954,39.0956,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>120 hrs</name>
+      <Point>
+        <coordinates>-134.0552,38.6124,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>132 hrs</name>
+      <Point>
+        <coordinates>-132.1271,38.0810,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>144 hrs</name>
+      <Point>
+        <coordinates>-130.1990,37.5495,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>156 hrs</name>
+      <Point>
+        <coordinates>-128.2959,36.9349,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>168 hrs</name>
+      <Point>
+        <coordinates>-126.3943,36.3153,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>180 hrs</name>
+      <Point>
+        <coordinates>-124.5038,35.6635,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>192 hrs</name>
+      <Point>
+        <coordinates>-122.6255,34.9767,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>204 hrs</name>
+      <Point>
+        <coordinates>-120.7152,34.4002,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Destination (Port of Los Angeles)</name>
+      <Point>
+        <coordinates>-118.2625,33.7300,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Route Path</name>
+      <LineString>
+        <coordinates>
+          -152.0,45.0
+          -151.1432,44.0274
+          -149.2516,43.3780
+          -147.3600,42.7286
+          -145.4684,42.0792
+          -143.5767,41.4297
+          -141.6851,40.7803
+          -139.8972,39.9768
+          -137.9463,39.5362
+          -135.9954,39.0956
+          -134.0552,38.6124
+          -132.1271,38.0810
+          -130.1990,37.5495
+          -128.2959,36.9349
+          -126.3943,36.3153
+          -124.5038,35.6635
+          -122.6255,34.9767
+          -120.7152,34.4002
+          -118.2625,33.7300
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+  </Document>
+</kml>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <Placemark>
+      <name>Current Position (Heading: 106°)</name>
+      <Point>
+        <coordinates>-152.0,45.0,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint Day 1</name>
+      <Point>
+        <coordinates>-144.63377261075792,41.79261950133671,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint Day 2</name>
+      <Point>
+        <coordinates>-136.2646096022312,39.15636213601102,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint Day 3</name>
+      <Point>
+        <coordinates>-127.8802991510323,36.79952494394099,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Destination: Port of Los Angeles</name>
+      <Point>
+        <coordinates>-118.2625,33.73,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Route</name>
+      <LineString>
+        <coordinates>
+          -152.0,45.0
+          -144.63377261075792,41.79261950133671
+          -136.2646096022312,39.15636213601102
+          -127.8802991510323,36.79952494394099
+          -118.2625,33.73
+        </coordinates>
+      </LineString>
+    </Placemark>
+  </Document>
+</kml>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Ever Mast Route to Port of Los Angeles</name>
+    
+    <Placemark>
+      <name>Current Position (Heading: 106)</name>
+      <Point>
+        <coordinates>-152.0,45.0,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Day 1</name>
+      <Point>
+        <coordinates>-151.07327296480705,44.003421484343804,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 2</name>
+      <Point>
+        <coordinates>-149.06382892057158,43.313541566545524,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Day 3</name>
+      <Point>
+        <coordinates>-147.00193269778012,42.60565387967226,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Day 4</name>
+      <Point>
+        <coordinates>-144.9393353949714,41.89752494462163,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Day 5</name>
+      <Point>
+        <coordinates>-143.04771157167212,41.24809495522582,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Day 6</name>
+      <Point>
+        <coordinates>-141.15608774837284,40.598664965830004,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Day 7</name>
+      <Point>
+        <coordinates>-139.20828898953914,39.821192049649255,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Day 8</name>
+      <Point>
+        <coordinates>-137.06135541143016,39.33630709609221,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Day 9</name>
+      <Point>
+        <coordinates>-134.88011497782514,38.839767833149196,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Day 10</name>
+      <Point>
+        <coordinates>-132.94518807090444,38.30645375356732,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Day 11</name>
+      <Point>
+        <coordinates>-130.9230610490513,37.74910521233003,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Day 12</name>
+      <Point>
+        <coordinates>-128.9098408786368,37.13498805143424,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Day 13</name>
+      <Point>
+        <coordinates>-126.79118799120867,36.444651982677314,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Day 14</name>
+      <Point>
+        <coordinates>-124.67733053693776,35.72699142975549,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Destination: Port of Los Angeles</name>
+      <Point>
+        <coordinates>-118.2625,33.73,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <LineString>
+        <coordinates>
+          -152.0,45.0
+          -151.07327296480705,44.003421484343804
+          -149.06382892057158,43.313541566545524
+          -147.00193269778012,42.60565387967226
+          -144.9393353949714,41.89752494462163
+          -143.04771157167212,41.24809495522582
+          -141.15608774837284,40.598664965830004
+          -139.20828898953914,39.821192049649255
+          -137.06135541143016,39.33630709609221
+          -134.88011497782514,38.839767833149196
+          -132.94518807090444,38.30645375356732
+          -130.9230610490513,37.74910521233003
+          -128.9098408786368,37.13498805143424
+          -126.79118799120867,36.444651982677314
+          -124.67733053693776,35.72699142975549
+          -118.2625,33.73
+        </coordinates>
+      </LineString>
+    </Placemark>
+    
+  </Document>
+</kml>

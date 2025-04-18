@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>EVER MAST Route</name>
+    
+    <Placemark>
+      <name>Current Position of EVER MAST</name>
+      <Point>
+        <coordinates>-152.000000,45.000000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 1</name>
+      <Point>
+        <coordinates>-152.454932,45.100000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 2</name>
+      <Point>
+        <coordinates>-152.398800,44.800000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 3</name>
+      <Point>
+        <coordinates>-150.002180,43.630000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 4</name>
+      <Point>
+        <coordinates>-147.515898,42.780000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 5</name>
+      <Point>
+        <coordinates>-145.447627,42.070000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 6</name>
+      <Point>
+        <coordinates>-140.279040,40.300000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 7</name>
+      <Point>
+        <coordinates>-140.000000,40.000000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 8</name>
+      <Point>
+        <coordinates>-137.425836,39.420000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 9</name>
+      <Point>
+        <coordinates>-134.958600,38.860000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 10</name>
+      <Point>
+        <coordinates>-134.818074,38.820000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 11</name>
+      <Point>
+        <coordinates>-132.090419,38.070000,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Waypoint 12</name>
+      <Point>
+        <coordinates>-130.089300,37.520000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 13</name>
+      <Point>
+        <coordinates>-130.001054,37.490000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 14</name>
+      <Point>
+        <coordinates>-126.936629,36.490000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 15</name>
+      <Point>
+        <coordinates>-126.521154,36.360000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 16</name>
+      <Point>
+        <coordinates>-125.796130,36.120000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 17</name>
+      <Point>
+        <coordinates>-125.402300,35.990000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 18</name>
+      <Point>
+        <coordinates>-124.787600,35.770000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 19</name>
+      <Point>
+        <coordinates>-124.335754,35.600000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 20</name>
+      <Point>
+        <coordinates>-121.532000,34.580000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 21</name>
+      <Point>
+        <coordinates>-120.884100,34.440000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 22</name>
+      <Point>
+        <coordinates>-120.500500,34.350000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 23</name>
+      <Point>
+        <coordinates>-120.750000,35.170000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Port San Luis</name>
+      <Point>
+        <coordinates>-120.646798,34.200000,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Route Line</name>
+      <LineString>
+        <coordinates>
+          -152.000000,45.000000
+          -152.454932,45.100000
+          -152.398800,44.800000
+          -150.002180,43.630000
+          -147.515898,42.780000
+          -145.447627,42.070000
+          -140.279040,40.300000
+          -140.000000,40.000000
+          -137.425836,39.420000
+          -134.958600,38.860000
+          -134.818074,38.820000
+          -132.090419,38.070000
+          -130.089300,37.520000
+          -130.001054,37.490000
+          -126.936629,36.490000
+          -126.521154,36.360000
+          -125.796130,36.120000
+          -125.402300,35.990000
+          -124.787600,35.770000
+          -124.335754,35.600000
+          -121.532000,34.580000
+          -120.884100,34.440000
+          -120.500500,34.350000
+          -120.750000,35.170000
+          -120.646798,34.200000
+        </coordinates>
+      </LineString>
+    </Placemark>
+    
+  </Document>
+</kml>

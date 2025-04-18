@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Waypoints for EVER MAST</name>
+
+    <!-- Current Position -->
+    <Placemark>
+      <name>Current Position, moving 106 degrees at 20 knots</name>
+      <Point>
+        <coordinates>-152.0,45.0,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Waypoint Day 1 -->
+    <Placemark>
+      <name>Waypoint Day 1</name>
+      <Point>
+        <coordinates>-151.56,44.17,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Waypoint Day 2 -->
+    <Placemark>
+      <name>Waypoint Day 2</name>
+      <Point>
+        <coordinates>-149.87,43.59,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Waypoint Day 3 -->
+    <Placemark>
+      <name>Waypoint Day 3</name>
+      <Point>
+        <coordinates>-148.36,43.07,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Waypoint Day 4 -->
+    <Placemark>
+      <name>Waypoint Day 4</name>
+      <Point>
+        <coordinates>-146.75,42.52,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Waypoint Day 5 -->
+    <Placemark>
+      <name>Waypoint Day 5</name>
+      <Point>
+        <coordinates>-145.10,41.95,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <!-- Final Destination -->
+    <Placemark>
+      <name>Final Destination</name>
+      <Point>
+        <coordinates>-120.646798,34.196891,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Path connecting all waypoints -->
+    <Placemark>
+      <name>Route Path</name>
+      <LineString>
+        <coordinates>
+          -152.0,45.0,0 
+          -151.56,44.17,0 
+          -149.87,43.59,0 
+          -148.36,43.07,0 
+          -146.75,42.52,0 
+          -145.10,41.95,0 
+          -120.646798,34.196891,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+  </Document>
+</kml>

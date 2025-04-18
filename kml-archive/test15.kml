@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>MIGHTY MINH Route</name>
+    
+    <Placemark>
+      <name>Current Position<br/>Heading: 309.0°</name>
+      <Point>
+        <coordinates>114.2741,22.5734,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 1 00:00</name>
+      <Point>
+        <coordinates>119.84617729168973,25.302965817042995,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Day 2 12:00</name>
+      <Point>
+        <coordinates>123.75841142637495,31.8296581542907,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Day 3 00:00</name>
+      <Point>
+        <coordinates>130.6181798855871,35.93221307877607,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 4 00:00</name>
+      <Point>
+        <coordinates>137.44188405476717,40.098810729221164,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 5 00:00</name>
+      <Point>
+        <coordinates>144.89888661396017,42.66983429561045,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 6 00:00</name>
+      <Point>
+        <coordinates>152.3058940454592,45.685083509699965,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 7 00:00</name>
+      <Point>
+        <coordinates>159.9481730726658,48.03750531902443,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 8 00:00</name>
+      <Point>
+        <coordinates>167.75856581982003,49.74658897034978,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 9 00:00</name>
+      <Point>
+        <coordinates>175.67350265340966,50.50785394262312,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 10 00:00</name>
+      <Point>
+        <coordinates>183.27874094205276,51.58969257796497,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 11 00:00</name>
+      <Point>
+        <coordinates>191.26240400718723,51.12812742143023,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 12 00:00</name>
+      <Point>
+        <coordinates>199.19567064176272,50.10749097512276,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 13 00:00</name>
+      <Point>
+        <coordinates>207.09244250302078,48.838885417389335,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 14 00:00</name>
+      <Point>
+        <coordinates>214.88043959170795,47.02108596722578,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 15 00:00</name>
+      <Point>
+        <coordinates>222.48682208167892,44.55515893008627,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 16 00:00</name>
+      <Point>
+        <coordinates>229.86557890340762,41.47338417053915,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 17 00:00</name>
+      <Point>
+        <coordinates>236.9585117261389,37.77757458401027,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Destination<br/>Port of Los Angeles</name>
+      <Point>
+        <coordinates>-118.2625,33.7300,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Route</name>
+      <LineString>
+        <coordinates>
+          114.2741,22.5734,0
+          119.84617729168973,25.302965817042995,0
+          123.75841142637495,31.8296581542907,0
+          130.6181798855871,35.93221307877607,0
+          137.44188405476717,40.098810729221164,0
+          144.89888661396017,42.66983429561045,0
+          152.3058940454592,45.685083509699965,0
+          159.9481730726658,48.03750531902443,0
+          167.75856581982003,49.74658897034978,0
+          175.67350265340966,50.50785394262312,0
+          183.27874094205276,51.58969257796497,0
+          191.26240400718723,51.12812742143023,0
+          199.19567064176272,50.10749097512276,0
+          207.09244250302078,48.838885417389335,0
+          214.88043959170795,47.02108596722578,0
+          222.48682208167892,44.55515893008627,0
+          229.86557890340762,41.47338417053915,0
+          236.9585117261389,37.77757458401027,0
+          -118.2625,33.7300,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+  </Document>
+</kml>

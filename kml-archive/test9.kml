@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Waypoints for EVER MAST to Port of Los Angeles</name>
+
+    <!-- Current Position -->
+    <Placemark>
+      <name>Current Position<br/>Heading: 106°</name>
+      <Point>
+        <coordinates>-152.0,45.0,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Waypoint Day 1 -->
+    <Placemark>
+      <name>Waypoint Day 1</name>
+      <Point>
+        <coordinates>-152.21,44.39,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Waypoint Day 2 -->
+    <Placemark>
+      <name>Waypoint Day 2</name>
+      <Point>
+        <coordinates>-151.45,44.13,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Waypoint Day 3 -->
+    <Placemark>
+      <name>Waypoint Day 3</name>
+      <Point>
+        <coordinates>-150.69,43.87,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Waypoint Day 4 -->
+    <Placemark>
+      <name>Waypoint Day 4</name>
+      <Point>
+        <coordinates>-149.86,43.59,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Waypoint Day 5 -->
+    <Placemark>
+      <name>Waypoint Day 5</name>
+      <Point>
+        <coordinates>-149.11,43.33,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Waypoint Day 6 -->
+    <Placemark>
+      <name>Waypoint Day 6</name>
+      <Point>
+        <coordinates>-148.35,43.07,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Waypoint Day 7 -->
+    <Placemark>
+      <name>Waypoint Day 7</name>
+      <Point>
+        <coordinates>-147.50,42.77,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Waypoint Day 8 -->
+    <Placemark>
+      <name>Waypoint Day 8</name>
+      <Point>
+        <coordinates>-146.74,42.52,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Waypoint Day 9 -->
+    <Placemark>
+      <name>Waypoint Day 9</name>
+      <Point>
+        <coordinates>-145.99,42.26,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Waypoint Day 10 -->
+    <Placemark>
+      <name>Waypoint Day 10</name>
+      <Point>
+        <coordinates>-145.17,41.98,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Destination -->
+    <Placemark>
+      <name>Port of Los Angeles</name>
+      <Point>
+        <coordinates>-118.2625,33.73,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Path connecting all waypoints -->
+    <Placemark>
+      <name>Route Path</name>
+      <LineString>
+        <coordinates>
+          -152.0,45.0,0 
+          -152.21,44.39,0 
+          -151.45,44.13,0 
+          -150.69,43.87,0 
+          -149.86,43.59,0 
+          -149.11,43.33,0 
+          -148.35,43.07,0 
+          -147.50,42.77,0 
+          -146.74,42.52,0 
+          -145.99,42.26,0 
+          -145.17,41.98,0 
+          -118.2625,33.73,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+  </Document>
+</kml>

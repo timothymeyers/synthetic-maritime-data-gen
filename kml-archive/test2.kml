@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>EVER MAST Shipping Route Corrections</name>
+    
+    <!-- Starting Location -->
+    <Placemark>
+      <name>Starting Location</name>
+      <Point>
+        <coordinates>-179.99998854099996,46.31211770900006,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <!-- Current Location -->
+    <Placemark>
+      <name>Current Location</name>
+      <Point>
+        <coordinates>-152.00,45.00,0</coordinates> <!-- Current Coordinates -->
+      </Point>
+    </Placemark>
+
+    <!-- Corrected Waypoints -->
+    <Placemark>
+      <name>Waypoint 1</name>
+      <Point>
+        <coordinates>-151.88,45.09,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 2</name>
+      <Point>
+        <coordinates>-151.64,45.05,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 3</name>
+      <Point>
+        <coordinates>-151.40,45.01,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 4</name>
+      <Point>
+        <coordinates>-151.17,44.97,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 5</name>
+      <Point>
+        <coordinates>-150.93,44.93,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 6</name>
+      <Point>
+        <coordinates>-150.70,44.88,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 7</name>
+      <Point>
+        <coordinates>-150.46,44.84,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 8</name>
+      <Point>
+        <coordinates>-150.23,44.80,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 9</name>
+      <Point>
+        <coordinates>-149.99,44.75,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 10</name>
+      <Point>
+        <coordinates>-149.76,44.71,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 11</name>
+      <Point>
+        <coordinates>-149.53,44.66,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 12</name>
+      <Point>
+        <coordinates>-149.29,44.62,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 13</name>
+      <Point>
+        <coordinates>-149.06,44.57,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 14</name>
+      <Point>
+        <coordinates>-148.83,44.52,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Ending Location -->
+    <Placemark>
+      <name>Ending Location</name>
+      <Point>
+        <coordinates>-120.64679768099995,34.19689075200006,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Line connecting all markers -->
+    <Placemark>
+      <name>Shipping Route Line</name>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          -179.99998854099996,46.31211770900006,0
+          -152.00,45.00,0
+          -151.88,45.09,0
+          -151.64,45.05,0
+          -151.40,45.01,0
+          -151.17,44.97,0
+          -150.93,44.93,0
+          -150.70,44.88,0
+          -150.46,44.84,0
+          -150.23,44.80,0
+          -149.99,44.75,0
+          -149.76,44.71,0
+          -149.53,44.66,0
+          -149.29,44.62,0
+          -149.06,44.57,0
+          -148.83,44.52,0
+          -120.64679768099995,34.19689075200006,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+  </Document>
+</kml>

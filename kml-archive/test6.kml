@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>EVER MAST Shipping Route</name>
+    
+    <Placemark>
+      <name>Starting Position</name>
+      <Point>
+        <coordinates>-152.0,45.0,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 1</name>
+      <Point>
+        <coordinates>-151.87517556899996,45.09257395900005,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 2</name>
+      <Point>
+        <coordinates>-151.63920523199997,45.05173165300005,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 3</name>
+      <Point>
+        <coordinates>-152.3988,44.4585,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 4</name>
+      <Point>
+        <coordinates>-150.00218,43.635695,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Waypoint 5</name>
+      <Point>
+        <coordinates>-147.515898,42.782108,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 6</name>
+      <Point>
+        <coordinates>-145.447627,42.072031,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 7</name>
+      <Point>
+        <coordinates>-140.27904,40.297558,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 8</name>
+      <Point>
+        <coordinates>-140.0,40.0,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 9</name>
+      <Point>
+        <coordinates>-137.425836,39.418625,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 10</name>
+      <Point>
+        <coordinates>-134.9586,38.8614,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 11</name>
+      <Point>
+        <coordinates>-134.818074,38.822668,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 12</name>
+      <Point>
+        <coordinates>-132.090419,38.070858,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 13</name>
+      <Point>
+        <coordinates>-130.0893,37.5193,0</coordinates>
+      </Point>
+    </Placemark>
+    
+    <Placemark>
+      <name>Waypoint 14</name>
+      <Point>
+        <coordinates>-130.001054,37.490546,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Waypoint 15</name>
+      <Point>
+        <coordinates>-126.936629,36.492042,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Waypoint 16</name>
+      <Point>
+        <coordinates>-126.521154,36.356665,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Waypoint 17</name>
+      <Point>
+        <coordinates>-125.79613,36.120424,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Waypoint 18</name>
+      <Point>
+        <coordinates>-125.4023,35.9921,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Waypoint 19</name>
+      <Point>
+        <coordinates>-124.7876,35.767315,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Waypoint 20</name>
+      <Point>
+        <coordinates>-124.335754,35.602083,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Waypoint 21</name>
+      <Point>
+        <coordinates>-121.532,34.5768,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Waypoint 22</name>
+      <Point>
+        <coordinates>-120.8841,34.4361,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Waypoint 23</name>
+      <Point>
+        <coordinates>-120.5005,34.3545,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Waypoint 24</name>
+      <Point>
+        <coordinates>-120.646798,34.196891,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Ending Position</name>
+      <Point>
+        <coordinates>-120.646798,34.196891,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <LineString>
+      <coordinates>
+        -152.0,45.0
+        -151.87517556899996,45.09257395900005
+        -151.63920523199997,45.05173165300005
+        -152.3988,44.4585
+        -150.00218,43.635695
+        -147.515898,42.782108
+        -145.447627,42.072031
+        -140.27904,40.297558
+        -140.0,40.0
+        -137.425836,39.418625
+        -134.9586,38.8614
+        -134.818074,38.822668
+        -132.090419,38.070858
+        -130.0893,37.5193
+        -130.001054,37.490546
+        -126.936629,36.492042
+        -126.521154,36.356665
+        -125.79613,36.120424
+        -125.4023,35.9921
+        -124.7876,35.767315
+        -124.335754,35.602083
+        -121.532,34.5768
+        -120.8841,34.4361
+        -120.5005,34.3545
+        -120.646798,34.196891
+      </coordinates>
+    </LineString>
+    
+  </Document>
+</kml>

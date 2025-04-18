@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>TINY TIM Waypoints</name>
+    <Style id="waypointStyle">
+      <IconStyle>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/kml/shapes/placemark_square.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+
+    <Placemark>
+      <name>Current Position (Heading: 0°)</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>114.2741,22.5734,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 1 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>112.95587615493186,19.05570967365891,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 2 12:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>111.39866125607567,15.371478394479249,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 3 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>109.80328769157667,11.709885029777062,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 4 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>107.73175111697174,8.288081964129647,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 5 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>105.99801939613407,4.688347430866605,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 6 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>104.16807861793056,1.2553724579902639,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 7 12:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>100.80394233452755,3.0251922846906725,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 8 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>98.0337550657486,5.908814097265379,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 9 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>94.51550044430115,6.751550044430116,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 10 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>90.52399405273029,6.497001252679449,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 11 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>86.53246824607814,6.236976919812824,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 12 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>82.5429791889413,5.94738276441147,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 13 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>78.6063198589706,6.2232978127715155,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 14 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>74.75417010009352,7.300664600844642,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 15 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>70.89295485176493,8.345043610843293,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 16 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>67.0217612189834,9.351773007381547,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 17 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>63.13980285051733,10.316133199561612,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 18 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>59.246563131774785,11.233877070378103,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 19 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>55.34168347592105,12.100758175053159,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 20 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>51.42503526678236,12.912838314365558,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 21 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>47.48240122209174,12.41373353701529,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 22 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>43.60789431611512,12.49619459905418,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 23 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>41.48177529899238,15.842115139137382,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 24 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>39.61025233073932,19.375816142700014,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 25 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>37.539254197555515,22.791118703666726,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 26 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>35.206333139511756,26.039386930264012,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 27 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>32.86913126303453,29.278751066554644,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 28 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>30.885356104726924,32.14236031267296,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 29 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>27.11969634092079,33.490182380549115,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 30 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>23.307727348995748,34.70216109513115,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 31 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>19.39790915295998,35.538890071187694,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 32 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>15.479498430297628,36.34266703560228,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 33 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>11.606519995252603,37.341149707491525,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 34 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>7.628409431283171,37.404134403769135,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 35 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>3.632469293187315,37.22420314969033,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 36 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>-0.3266658738336088,36.672821014972214,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 37 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>-4.28015261206838,36.06459193759308,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 38 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>-8.202728995516761,36.545662540509745,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 39 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>-9.797294687323175,39.67011557793803,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 40 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>-9.222563577434652,43.53451123104401,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 41 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>-7.0473745680965125,46.87637961541814,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Day 42 00:00</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>-3.9393614706932047,49.143549111437146,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Destination: Le Havre</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>-0.1405748722069033,49.50978836118703,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+    <name>Route Path</name>
+    <Style>
+        <LineStyle>
+            <color>ffffaa00</color> <!-- Teal color in KML (aabbggrr format) -->
+            <width>3</width>
+        </LineStyle>
+    </Style>
+    <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+            114.2741,22.5734,0
+            112.95587615493186,19.05570967365891,0
+            111.39866125607567,15.371478394479249,0
+            109.80328769157667,11.709885029777062,0
+            107.73175111697174,8.288081964129647,0
+            105.99801939613407,4.688347430866605,0
+            104.16807861793056,1.2553724579902639,0
+            100.80394233452755,3.0251922846906725,0
+            98.0337550657486,5.908814097265379,0
+            94.51550044430115,6.751550044430116,0
+            90.52399405273029,6.497001252679449,0
+            86.53246824607814,6.236976919812824,0
+            82.5429791889413,5.94738276441147,0
+            78.6063198589706,6.2232978127715155,0
+            74.75417010009352,7.300664600844642,0
+            70.89295485176493,8.345043610843293,0
+            67.0217612189834,9.351773007381547,0
+            63.13980285051733,10.316133199561612,0
+            59.246563131774785,11.233877070378103,0
+            55.34168347592105,12.100758175053159,0
+            51.42503526678236,12.912838314365558,0
+            47.48240122209174,12.41373353701529,0
+            43.60789431611512,12.49619459905418,0
+            41.48177529899238,15.842115139137382,0
+            39.61025233073932,19.375816142700014,0
+            37.539254197555515,22.791118703666726,0
+            35.206333139511756,26.039386930264012,0
+            32.86913126303453,29.278751066554644,0
+            30.885356104726924,32.14236031267296,0
+            27.11969634092079,33.490182380549115,0
+            23.307727348995748,34.70216109513115,0
+            19.39790915295998,35.538890071187694,0
+            15.479498430297628,36.34266703560228,0
+            11.606519995252603,37.341149707491525,0
+            7.628409431283171,37.404134403769135,0
+            3.632469293187315,37.22420314969033,0
+            -0.3266658738336088,36.672821014972214,0
+            -4.28015261206838,36.06459193759308,0
+            -8.202728995516761,36.545662540509745,0
+            -9.797294687323175,39.67011557793803,0
+            -9.222563577434652,43.53451123104401,0
+            -7.0473745680965125,46.87637961541814,0
+            -3.9393614706932047,49.143549111437146,0
+            -0.1405748722069033,49.50978836118703,0
+        </coordinates>
+    </LineString>
+</Placemark>
+
+
+  </Document>
+</kml>

@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>MIGHTY MINH Route</name>
+    <Placemark>
+      <name>Current Position of MIGHTY MINH</name>
+      <Point>
+        <coordinates>114.2741,22.5734,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 1 (Day 1 00:00)</name>
+      <Point>
+        <coordinates>116.72911826522852,22.87857025682658,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 2 (Day 1 12:00)</name>
+      <Point>
+        <coordinates>119.84617729168973,25.302965817042992,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 3 (Day 2 00:00)</name>
+      <Point>
+        <coordinates>122.07154644290138,28.590187984512156,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 4 (Day 2 12:00)</name>
+      <Point>
+        <coordinates>123.75841142637495,31.8296581542907,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 5 (Day 3 00:00)</name>
+      <Point>
+        <coordinates>127.16255546413237,33.930087484261264,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 6 (Day 3 12:00)</name>
+      <Point>
+        <coordinates>130.6181798855871,35.93221307877608,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 7 (Day 4 00:00)</name>
+      <Point>
+        <coordinates>133.96071371976157,38.129362952453064,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 8 (Day 4 12:00)</name>
+      <Point>
+        <coordinates>137.44188405476717,40.098810729221164,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 9 (Day 5 00:00)</name>
+      <Point>
+        <coordinates>141.09669461534878,41.619737661612916,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 10 (Day 5 12:00)</name>
+      <Point>
+        <coordinates>144.89888661396014,42.66983429561044,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 11 (Day 6 00:00)</name>
+      <Point>
+        <coordinates>148.58445037334917,44.21850347597781,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 12 (Day 6 12:00)</name>
+      <Point>
+        <coordinates>152.30589404545918,45.68508350969996,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 13 (Day 7 00:00)</name>
+      <Point>
+        <coordinates>156.11072238918482,46.908801526237724,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 14 (Day 7 12:00)</name>
+      <Point>
+        <coordinates>159.94817307266578,48.037505319024426,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 15 (Day 8 00:00)</name>
+      <Point>
+        <coordinates>163.83706075755072,48.95804724881793,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 16 (Day 8 12:00)</name>
+      <Point>
+        <coordinates>167.75856581982,49.74658897034978,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 17 (Day 9 00:00)</name>
+      <Point>
+        <coordinates>171.69989366122033,50.409156367629635,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 18 (Day 9 12:00)</name>
+      <Point>
+        <coordinates>175.67350265340963,50.50785394262312,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 19 (Day 10 00:00)</name>
+      <Point>
+        <coordinates>179.6462270170879,50.04152666459094,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 20 (Day 10 12:00)</name>
+      <Point>
+        <coordinates>183.27874094205274,51.589692577964954,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 21 (Day 11 00:00)</name>
+      <Point>
+        <coordinates>187.26940965769833,51.36476242507487,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 22 (Day 11 12:00)</name>
+      <Point>
+        <coordinates>191.2624040071872,51.128127421430236,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 23 (Day 12 00:00)</name>
+      <Point>
+        <coordinates>195.23091868992788,50.63734186020437,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 24 (Day 12 12:00)</name>
+      <Point>
+        <coordinates>199.1956706417627,50.107490975122765,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 25 (Day 13 00:00)</name>
+      <Point>
+        <coordinates>203.1524851387253,49.521987119652344,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 26 (Day 13 12:00)</name>
+      <Point>
+        <coordinates>207.09244250302072,48.83888541738934,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 27 (Day 14 00:00)</name>
+      <Point>
+        <coordinates>211.00808181676402,48.02350567115802,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 28 (Day 14 12:00)</name>
+      <Point>
+        <coordinates>214.8804395917079,47.021085967225794,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 29 (Day 15 00:00)</name>
+      <Point>
+        <coordinates>218.7081526793192,45.863040163715105,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 30 (Day 15 12:00)</name>
+      <Point>
+        <coordinates>222.48682208167884,44.55515893008629,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 31 (Day 16 00:00)</name>
+      <Point>
+        <coordinates>226.2084761473805,43.09217163020556,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 32 (Day 16 12:00)</name>
+      <Point>
+        <coordinates>229.86557890340754,41.473384170539184,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 33 (Day 17 00:00)</name>
+      <Point>
+        <coordinates>233.4510977608087,39.70060533670431,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 34 (Day 17 12:00)</name>
+      <Point>
+        <coordinates>236.95851172613885,37.77757458401031,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Waypoint 35 (Day 18 00:00)</name>
+      <Point>
+        <coordinates>239.11822816103424,34.43560474989471,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Destination: Port of Los Angeles</name>
+      <Point>
+        <coordinates>-118.2625,33.73,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          114.2741,22.5734,0 
+          116.72911826522852,22.87857025682658,0 
+          119.84617729168973,25.302965817042992,0 
+          122.07154644290138,28.590187984512156,0 
+          123.75841142637495,31.8296581542907,0 
+          127.16255546413237,33.930087484261264,0 
+          130.6181798855871,35.93221307877608,0 
+          133.96071371976157,38.129362952453064,0 
+          137.44188405476717,40.098810729221164,0 
+          141.09669461534878,41.619737661612916,0 
+          144.89888661396014,42.66983429561044,0 
+          148.58445037334917,44.21850347597781,0 
+          152.30589404545918,45.68508350969996,0 
+          156.11072238918482,46.908801526237724,0 
+          159.94817307266578,48.037505319024426,0 
+          163.83706075755072,48.95804724881793,0 
+          167.75856581982,49.74658897034978,0 
+          171.69989366122033,50.409156367629635,0 
+          175.67350265340963,50.50785394262312,0 
+          179.6462270170879,50.04152666459094,0 
+          -176.72125905794726,51.589692577964954,0 
+          -172.73059034230167,51.36476242507487,0 
+          -168.7375959928128,51.128127421430236,0 
+          -164.76908131007212,50.63734186020437,0 
+          -160.8043293582373,50.107490975122765,0 
+          -156.8475148612747,49.521987119652344,0 
+          -152.90755749697928,48.83888541738934,0 
+          -148.99191818323598,48.02350567115802,0 
+          -145.1195604082921,47.021085967225794,0 
+          -141.2918473206808,45.863040163715105,0 
+          -137.51317791832116,44.55515893008629,0 
+          -133.7915238526195,43.09217163020556,0 
+          -130.13442109659246,41.473384170539184,0 
+          -126.5489022391913,39.70060533670431,0 
+          -123.04148827386115,37.77757458401031,0 
+          -120.88177183896576,34.43560474989471,0 
+          -118.2625,33.73,0 
+        </coordinates>
+      </LineString>
+    </Placemark>
+  </Document>
+</kml>

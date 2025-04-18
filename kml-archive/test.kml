@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Waypoints for EVER MAST</name>
+    <Style id="waypointStyle">
+      <IconStyle>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    
+    <Placemark>
+      <name>Original Position</name>
+      <description>Original Position of EVER MAST</description>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>-152.0000,45.0000,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Waypoint 1</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>-151.9800,45.1100,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Waypoint 2</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>-151.9500,45.2100,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Waypoint 3</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>-151.9000,45.3000,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Waypoint 4</name>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>-151.8000,45.4000,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Final Destination</name>
+      <description>Destination Point</description>
+      <styleUrl>#waypointStyle</styleUrl>
+      <Point>
+        <coordinates>-120.6468,34.1969,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>Route Line</name>
+      <LineString>
+        <coordinates>
+          -152.0000,45.0000 
+          -151.9800,45.1100 
+          -151.9500,45.2100 
+          -151.9000,45.3000 
+          -151.8000,45.4000 
+          -120.6468,34.1969
+        </coordinates>
+      </LineString>
+    </Placemark>
+    
+  </Document>
+</kml>
