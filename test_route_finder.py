@@ -162,6 +162,41 @@ class TestRouteFinder(unittest.TestCase):
         self.assertEqual(result['route_type'], RouteType.MAJOR)
         self.assertLess(result['heading_diff'], 45)
 
+    def test_will_intersect_route_circle(self):
+        """Test _will_intersect_route for 32 headings around a simple horizontal route."""
+        import math
+        finder = RouteFinder()
+        # Horizontal route from (0,0) to (10,0)
+        route = LineString([(0, 0), (10, 0)])
+        finder.major = [route]
+        finder.middle = []
+        finder.minor = []
+        finder._build_indices()
+        route_id = 1
+        route_type = RouteType.MAJOR
+        # Place ship at (5, 1) (1 unit north of the route)
+        lon, lat = 5, 1
+        results = []
+        for i in range(32):
+            heading = i * 360 / 32
+            intersects = finder._will_intersect_route(lon, lat, heading, route_id, route_type)
+            results.append((heading, intersects))
+        # Headings 180 (south, toward route) should intersect, 0 (north, away) should not
+        # Parallel (90, 270) should not intersect
+        for heading, intersects in results:
+            # Toward route: headings between 135 and 225 (±45° around 180)
+            if 90 < heading < 270:
+                self.assertTrue(intersects, f"Heading {heading} should intersect route")
+            # Away from route: headings between 315-360 or 0-45 (±45° around 0)
+            elif heading == 90 or heading == 270:
+                self.assertFalse(intersects, f"Heading {heading} should not intersect route (parallel)")
+            # Parallel: 80-100 and 260-280
+            elif heading < 90 or heading > 270:
+                self.assertFalse(intersects, f"Heading {heading} should not intersect route (away)")
+            # Other angles: ambiguous, just check it's a boolean
+            else:
+                self.assertIsInstance(intersects, bool)
+
 class TestRouteFinderWithRealData(unittest.TestCase):
     """Test RouteFinder with actual shipping lane data from default URL."""
     

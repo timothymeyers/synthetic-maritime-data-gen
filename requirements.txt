@@ -9,3 +9,5 @@ autogen
 autogen-agentchat
 autogen-ext[openai]
 autogen-ext[azure-openai]
+searoute
+geopy

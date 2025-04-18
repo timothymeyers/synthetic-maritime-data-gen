@@ -1,6 +1,7 @@
 import asyncio
 import json
 import os
+from logging import logger
 from typing import List, Sequence
 
 from dotenv import load_dotenv
@@ -10,6 +11,8 @@ from autogen_agentchat.teams import RoundRobinGroupChat
 from autogen_agentchat.ui import Console
 from autogen_core.tools import FunctionTool
 from autogen_ext.models.openai import OpenAIChatCompletionClient, AzureOpenAIChatCompletionClient
+
+import searoute as sr
 
 # import the RouteFinder class from the route_finder module in this directory
 from route_finder import RouteFinder
@@ -28,24 +31,33 @@ def create_4o_mini_model_client() -> OpenAIChatCompletionClient:
 
 async def get_possible_ship_route (longitude: float, latitude: float, heading: float) -> json:
     """Get the ship route based on the given coordinates."""
-    # Simulate a function that fetches the ship route
-    #await asyncio.sleep(1)
     
     distance_threshold = 5  # in nautical miles
     heading_threshold = 5  # in degrees
     
-    # loop through heading thresholds, increasing by 5 degrees, until you get to 45 degrees.
-    # If you don't find a route, return None
     for heading_threshold in range(5, 46, 5):
-    
         for distance_threshold in range(25, 201, 25):
-    
-           print (f"Trying with distance threshold: {distance_threshold} and heading threshold: {heading_threshold}. ")
+           logger.info(f"Searching for route with distance threshold: {distance_threshold} and heading threshold: {heading_threshold}")
            route = finder.find_nearest_route_with_heading(longitude, latitude, heading, distance_threshold=distance_threshold, heading_threshold=heading_threshold)
-           if route is not None: return route
+           if route is not None: 
+               logger.info(f"Route found: {route}")
+               return route
     
-        
+    logger.info("No route found")
+       
     return None
+
+async def get_ship_route (origin_lon, origin_lat, dest_lon, dest_lat) -> json:
+    """Get the ship route based on the given coordinates."""
+    
+    origin = [origin_lon, origin_lat]
+    destination = [dest_lon, dest_lat]
+
+    route = sr.searoute(origin, destination)
+    print(f"Route: {route}")
+       
+    return None
+
 
 async def main() -> None:
     
@@ -62,8 +74,11 @@ async def main() -> None:
         tools=[
             FunctionTool(
                 get_possible_ship_route,
-                description="Get the ship route based on the given coordinates and heading.",
-                
+                description="Get the ship route based on its current position and heading.",
+            ),
+            FunctionTool(
+                get_ship_route,
+                description="Get the ship route based on origin and destination coordinates.",
             )
         ]
     )

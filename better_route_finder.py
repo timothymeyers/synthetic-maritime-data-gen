@@ -9,9 +9,10 @@ import requests
 import searoute as sr
 from rtree import index
 from shapely.geometry import shape, MultiLineString, LineString, Point
+from geopy.distance import geodesic
 
 # Configure logging
-logging.basicConfig(level=logging.DEBUG, 
+logging.basicConfig(level=logging.INFO, 
                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -266,12 +267,33 @@ class BetterRouteFinder:
         logger.debug("-" *40)
         logger.info(f"Finding next waypoints at ({lon}, {lat}) with heading {heading}°")
         
-        # Find the nearest route first
-        route = self.find_nearest_route_with_heading(lon, lat, heading)
+        # Initial thresholds
+        distance_threshold = 5  # in nautical miles
+        heading_threshold = 5  # in degrees
+        max_distance_threshold = 100
+        max_heading_threshold = 45
+
+        route = None
+        current_lon, current_lat = lon, lat
+
+        while not route:
+            route = self.find_nearest_route_with_heading(
+            current_lon, current_lat, heading, distance_threshold, heading_threshold
+            )
+
+            if not route:
+            # Move 10 nautical miles along current heading using accurate geodesic calculation
+                
+                destination_point = geodesic(nautical=10).destination((current_lat, current_lon), heading)
+                
+                logger.debug(f"\tNo route found - moving to new point: ({destination_point.latitude}, {destination_point.longitude})")
+                
+                current_lat, current_lon = destination_point.latitude, destination_point.longitude
+                # Increase thresholds for next iteration, capped at max values
+                distance_threshold = min(distance_threshold + 25, max_distance_threshold)
+                heading_threshold = min(heading_threshold + 5, max_heading_threshold)
+              
         
-        if not route:
-            logger.warning("No route found")
-            return []
         
         # Get the waypoints along the route
         waypoints = self.get_waypoints(route, speed_knot, time_hrs, num_waypoints)

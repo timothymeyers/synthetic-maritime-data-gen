@@ -44,7 +44,7 @@ class TestBetterRouteFinder(unittest.TestCase):
         
         #self.finder.get_waypoints(result, speed_knot=10, time_hrs=72, num_waypoints=3)
         
-        result = self.finder.get_next_waypoints_with_speed_and_heading_unknown_route(-152.0, 45.0, 106, speed_knot=10, time_hrs=72, num_waypoints=4)
+        result = self.finder.get_next_waypoints_with_speed_and_heading_unknown_route(-150.0, 45.0, 106, speed_knot=10, time_hrs=72, num_waypoints=4)
         
         self.assertIsNotNone(result)
         self.assertIn('waypoints', result)
