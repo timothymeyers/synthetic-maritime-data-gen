@@ -184,5 +184,21 @@ class TestBetterRouteFinder(unittest.TestCase):
         route = finder._get_route_by_id(99, 'Major')
         self.assertIsNone(route)
 
+    def test_is_near_port(self):
+        finder = BetterRouteFinder()
+        
+        result = finder.is_near_port(0.107054, 49.485998, 10)
+        print (result)
+        # Test with a point near a port
+        result = finder.is_near_port(117.744852, 38.986802, 10)
+        print (result)
+        #self.assertTrue(result)
+        
+        result = finder.is_near_port(-152, 45, 10)
+        print (result)
+        #self.assertTrue(result)
+        
+     
+
 if __name__ == '__main__':
     unittest.main()

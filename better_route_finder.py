@@ -7,6 +7,8 @@ from typing import Dict, List, Optional, Tuple, Union
 # Third-party imports
 import requests
 import searoute as sr
+import osmnx as ox
+from osmnx._errors import InsufficientResponseError
 from rtree import index
 from shapely.geometry import shape, MultiLineString, LineString, Point
 from geopy.distance import geodesic
@@ -141,6 +143,47 @@ class BetterRouteFinder:
         except Exception as e:
             logger.error(f"Error finding route: {str(e)}")
             raise
+    
+    def is_near_port (self, lon: float, lat: float, distance_threshold: float = 5.0) -> bool:
+        """Check if a point is near a port within a specified distance.
+        
+        Args:
+            lon: Longitude coordinate
+            lat: Latitude coordinate
+            distance_threshold: Distance in nautical miles to consider as "near"
+            
+        Returns:
+            True if the point is near a port, False otherwise
+        """
+        logger.debug(f"Checking if point ({lon}, {lat}) is near a port within {distance_threshold}nm")
+        
+        point = Point(lon, lat)
+
+        # Define search radius in meters based on distance threshold
+        radius = distance_threshold * 1852
+
+        # Query features tagged as 'harbour' or 'port
+        tags = {'harbour': True, 'seaport': True, 'port': True}
+
+        try: 
+        # Run the query
+            gdf = ox.features_from_point((lat, lon), tags=tags, dist=radius)
+        except InsufficientResponseError as e:
+            logger.error(f"Error querying ports: {str(e)}")
+            return False
+        except Exception as e:
+            logger.error(f"Unexpected error querying ports: {str(e)}")
+            return False
+
+        # Check if any ports are found
+        if not gdf.empty:
+            print("✅ Port(s) found nearby!")
+            print(gdf)
+            return True
+        else:
+            print("❌ No ports found within radius.")
+        
+        return False
     
     def _find_single_route(
         self,

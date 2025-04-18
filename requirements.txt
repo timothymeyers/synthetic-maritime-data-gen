@@ -11,3 +11,4 @@ autogen-ext[openai]
 autogen-ext[azure-openai]
 searoute
 geopy
+osmnx
